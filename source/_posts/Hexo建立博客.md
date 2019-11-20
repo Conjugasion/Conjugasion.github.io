@@ -1,7 +1,7 @@
 ---
 title: hexo搭建博客
-tag: hexo
-category: blog
+tag: Hexo
+category: Blog
 excerpt: 使用Github搭建属于自己的博客
 cover: /establish-blog-resource/sakura.png
 ---

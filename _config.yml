@@ -91,6 +91,8 @@ ignore:
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 theme: hexo-theme-aero-dual-master
+# theme_style is default to 'light',dark
+theme_style: light
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
