@@ -3,7 +3,7 @@ title: Python连接Mysql
 tag: [Python,Mysql]
 category: Python
 excerpt: 第三方库pymysql使用教程
-cover: /EVA1.jpg
+cover: /image1.jpg
 ---
 ### 连接方式
 ```

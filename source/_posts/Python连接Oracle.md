@@ -3,7 +3,7 @@ title: Python连接Oracle
 tag: [Python,Oracle]
 category: Python
 excerpt: 第三方库cx_Oracle，踩坑...
-cover: /EVA1.jpg
+cover: /image2.jpg
 ---
 ### 安装模块
 使用第三方模块 `cx_Oracle`

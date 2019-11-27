@@ -3,7 +3,7 @@ title: urllib和BeautifulSoup使用指南
 tag: [Python,urllib,BeautifulSoup,pymysql]
 category: Python
 excerpt: 爬取天眼查的公司评分
-cover: /EVA2.jpg
+cover: /image5.jpg
 ---
 ### 自己遇到的坑点
 `\<div class = "search-block header-block-container">......\</div>`

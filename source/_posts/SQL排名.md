@@ -3,6 +3,7 @@ title: Mysql排名函数
 tag: Mysql
 category: Mysql
 excerpt: 取第几名的数据，RANK并列跳跃排名、DENSE_RANK并列连续排序、ROW_NUMBER连续排名
+cover: /image6.jpg
 ---
 **`RANK`**并列跳跃排名，并列即相同的值，相同的值保留重复名次，遇到下一个不同值时，跳跃到总共的排名。
 **`DENSE_RANK`**DENSE_RANK并列连续排序，并列即相同的值，相同的值保留重复名次，遇到下一个不同值时，依然按照连续数字排名。

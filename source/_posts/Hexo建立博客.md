@@ -3,7 +3,7 @@ title: hexo搭建博客
 tag: Hexo
 category: Blog
 excerpt: 使用Github搭建属于自己的博客
-cover: /establish-blog-resource/sakura.png
+cover: /image4.jpg
 ---
 ### **1、安装Node.js和配置好Node.js环境。下载链接如下：**
 [Node.js下载](https://nodejs.org/zh-cn/download/)
