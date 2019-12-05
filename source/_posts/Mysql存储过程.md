@@ -5,15 +5,20 @@ category: Mysql
 excerpt: 存储过程入门
 cover: /image11.jpg
 ---
+### **navicat书写存储过程踩坑**
+● navicat已经自动设定delimiter不为；，所以在navicat中书写存储过程不用在开头修改结束符delimiter // or \$$，但是如果在Mysql命令行里书写存储过程，需要变更结束符。
+● navicat书写存储过程的格式，有时候缩进会导致莫名其妙报错，所以可以试试不缩进。
+● int类型可以不设置长度和default默认值，varchar类型可以不设定default默认值，但是必须指定长度。
+
 ### **定义**
 `存储过程`(Stored Procedure)是在大型数据库系统中，一组为了完成特定功能的SQL语句集，存储在数据库中，经过第一次编译后调用不需要再次编译，用户通过指定存储过程的名字并给出参数(如果该存储过程带有参数)来执行它。存储过程是数据库中的一个重要对象。
 
 ### **存储过程的特点**
-1、能完成较复杂的判断和运算
-2、可编程行强，灵活
-3、SQL编程的代码可重复使用
-4、执行的速度相对快一些
-5、减少网络之间的数据传输，节省开销   
+● 能完成较复杂的判断和运算
+● 可编程性强，灵活
+● SQL编程的代码可重复使用
+● 执行的速度相对快一些
+● 减少网络之间的数据传输，节省开销   
 
 ### **创建存储过程的语法**
 
@@ -55,17 +60,17 @@ end;
 ```
 **总结**
 
-(1) **变量一定要声明在begin-end块内的最前面，不然会报错！**
-(2) 变量的声明使用declare,一句declare只声明一个变量，变量必须先声明后使用;
-(3) 变量具有数据类型和长度，与mysql的SQL数据类型保持一致，因此甚至还能设定默认值、字符集和排序规则;
-(4) 变量可以通过set来赋值，也可以通过select into的方式赋值;
-(5) 变量需要返回，可以使用select语句，如：select 变量名。
+●  **变量一定要声明在begin-end块内的最前面，不然会报错！**
+●  变量的声明使用declare,一句declare只声明一个变量，变量必须先声明后使用;
+●  变量具有数据类型和长度，与mysql的SQL数据类型保持一致，因此甚至还能设定默认值、字符集和排序规则;
+●  变量可以通过set来赋值，也可以通过select into的方式赋值;
+●  变量需要返回，可以使用select语句，如：`select 变量名`。
 
 ### **变量作用域**
 **说明**
-(1) 存储过程中变量是有作用域的，作用范围在begin和end块之间，end结束变量的作用范围即结束。
-(2) 需要多个块之间传值，可以使用全局变量，即放在所有代码块之前
-(3) 传参变量是全局的，可以在多个块之间起作用
+● 存储过程中变量是有作用域的，作用范围在begin和end块之间，end结束变量的作用范围即结束。
+● 需要多个块之间传值，可以使用全局变量，即放在所有代码块之前
+● 传参变量是全局的，可以在多个块之间起作用
 
 **示例**
 
@@ -415,12 +420,15 @@ create procedure test11()
 </div>
 
 ### **自定义函数**
-函数与存储过程最大的区别是函数必须有返回值，否则会报错
+● 函数与存储过程最大的区别是函数必须有返回值，否则会报错；
+● 函数参数没有IN/OUT/INOUT之分，若在参数前加了IN/OUT/INOUT会报错。
 **示例1**
+向函数传入指定userid，返回对应的username
 
 ```bash
 create function getusername(userid int) returns varchar(32)
-    reads sql data  -- 从数据库中读取数据，但不修改数据
+    -- 从数据库中读取数据，但不修改数据
+    reads sql data  
     begin
         declare username varchar(32) default '';
         select name into username from users where id=userid;
@@ -435,23 +443,29 @@ create function getusername(userid int) returns varchar(32)
 根据userid，获取accoutid,id,name组合成UUID作为用户的唯一标识
 
 ```bash
-  create function getuuid(userid int) returns varchar(64)
-    reads sql data  -- 从数据库中读取数据，但不修改数据
-    begin
-        declare uuid varchar(64) default '';
-        select concat(accontid,'_',id,'_',name) into uuid from users where id=userid;
-        return uuid;
-    end;
+create function getuuid(userid int) returns varchar(64)
+  reads sql data  -- 从数据库中读取数据，但不修改数据
+  begin
+      declare uuid varchar(64) default '';
+      select concat(accontid,'_',id,'_',name) into uuid from users where id=userid;
+      return uuid;
+  end;
 ```
 <div style="text-align:center">
 <img src="/Mysql_stored_procedure/image18.png">
 </div>
 
+**Mysql创建函数的四个数据存取限制参数**
+● `CONTAINS SQL`表示子程序不包含读或写数据的语句；`NO SQL`表示子程序不包含SQL语句；`READS SQL DATA`表示子程序包含读数据语句，但不包含写数据语句；`MODIFIES SQL DATA`表示子程序包含写数据语句；
+● 如果没有明确给定，默认`CONTAINS SQL`；
+● 具体写哪一个参数并不会真的限制下面的实际操作！
+
 **总结**
 ● 创建函数使用create function 函数名(参数) returns 返回类型；
 ● 函数体放在begin和end之间；
-● returns指定函数的返回值；
-● 函数调用使用select getusername()。
+● returns指定函数的返回值，varchar要带长度；
+● 函数调用使用**select 函数名()**。
+mysql创建存储过程的时候发现有这么四个数据存取限制的参数，网上查了好久从官网得到如下结果
 
 ### **触发器**
 触发器是一种对象，它能根据对表的操作触发一些相应的动作，这些动作可以是insert,update,delete等操作。
@@ -506,12 +520,18 @@ delete from users where id=6;
 **event的创建格式**
 
 ```bash
-create event[IF NOT EXISTS]event_name -- 创建使用create event
-    ON SCHEDULE schedule -- on schedule 什么时候来执行
-    [ON COMPLETION [NOT] PRESERVE] -- 调度计划执行完成后是否还保留
-    [ENABLE | DISABLE] -- 是否开启事件，默认开启
-    [COMMENT 'comment'] -- 事件的注释
-    DO sql_statement; -- 这个调度计划要做什么？
+-- 创建使用create event
+create event[IF NOT EXISTS]event_name
+    -- on schedule 什么时候来执行
+    ON SCHEDULE schedule 
+    -- 调度计划执行完成后是否还保留
+    [ON COMPLETION [NOT] PRESERVE]
+    -- 是否开启事件，默认开启
+    [ENABLE | DISABLE]
+    -- 事件的注释
+    [COMMENT 'comment']
+    -- 这个调度计划要做什么
+    DO sql_statement;
 ```
 **执行时间说明**
 ● 单次计划任务示例

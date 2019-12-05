@@ -56,7 +56,7 @@ public/
 在`username.github.io`仓库中，目前默认的分支是master,用来存放静态文件。我们新建一个分支hexo,并设为默认分支，用来存放环境文件。
 
 <div style="text-align:center">
-<img src="/sync-blog/image1.jpg">
+<img src="/Hexo博客同步管理/image1.jpg">
 </div>
 <br />
 
@@ -94,7 +94,7 @@ public/
 github提供了两种`git clone`的方式：https和ssh。由于https速度慢，且每次都要输入口令，所以我们一般选择使用ssh方式，这就需要我们添加ssh key。
 
 <div style="text-align:center">
-<img src="/sync-blog/image2.jpg">
+<img src="/Hexo博客同步管理/image2.jpg">
 </div>
 <br />
 
