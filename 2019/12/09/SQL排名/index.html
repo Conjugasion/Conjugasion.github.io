@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Lucas">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Mysql排名函数"/>
+  <meta property="og:description" content="" />
+  <meta property="og:site_name" content="Sakura"/>
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="http://yoursite.com"/>
+  
+    <link rel="alternate" href="/atom.xml" title="Sakura" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>Sakura</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/image6.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">Mysql排名函数</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/Conjugasion" target="_blank" rel="noopener">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By Lucas</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2019-12-09</span>
+            <span class="time">19:40:26</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/Mysql/">Mysql</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Mysql/">#Mysql</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p><strong><code>RANK</code></strong>并列跳跃排名，并列即相同的值，相同的值保留重复名次，遇到下一个不同值时，跳跃到总共的排名。<br><strong><code>DENSE_RANK</code></strong>DENSE_RANK并列连续排序，并列即相同的值，相同的值保留重复名次，遇到下一个不同值时，依然按照连续数字排名。<br><strong><code>ROW_NUMBER</code></strong>连续排名，即使相同的值，依旧按照连续数字进行排名。</p>
+<h3 id="数据库表"><a href="#数据库表" class="headerlink" title="数据库表"></a>数据库表</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line"> Navicat Premium Data Transfer</span><br><span class="line"></span><br><span class="line"> Source Server         : 小段的数据库</span><br><span class="line"> Source Server Type    : MySQL</span><br><span class="line"> Source Server Version : 50725</span><br><span class="line"> Source Host           : 10.18.2.160:14000</span><br><span class="line"> Source Schema         : djl</span><br><span class="line"></span><br><span class="line"> Target Server Type    : MySQL</span><br><span class="line"> Target Server Version : 50725</span><br><span class="line"> File Encoding         : 65001</span><br><span class="line"></span><br><span class="line"> Date: 20/11/2019 09:34:50</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">SET NAMES utf8mb4;</span><br><span class="line">SET FOREIGN_KEY_CHECKS = 0;</span><br><span class="line"></span><br><span class="line">-- ----------------------------</span><br><span class="line">-- Table structure <span class="keyword">for</span> tdf_SHIPSIZE</span><br><span class="line">-- ----------------------------</span><br><span class="line">DROP TABLE IF EXISTS `tdf_SHIPSIZE`;</span><br><span class="line">CREATE TABLE `tdf_SHIPSIZE`  (</span><br><span class="line">  `COMPANY_CODE` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,</span><br><span class="line">  `COMPANY_NAME` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL,</span><br><span class="line">  `AMOUNT` int(255) NULL DEFAULT NULL,</span><br><span class="line">  `GRADE` int(255) NULL DEFAULT NULL</span><br><span class="line">) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Compact;</span><br><span class="line"></span><br><span class="line">-- ----------------------------</span><br><span class="line">-- Records of tdf_SHIPSIZE</span><br><span class="line">-- ----------------------------</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'66011600'</span>, <span class="string">'天津中散船舶管理有限公司'</span>, 9, 2);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'53100000'</span>, <span class="string">'中国船舶燃料连云港有限公司'</span>, 3, 0);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'62030000'</span>, <span class="string">'大连华昌船务有限公司'</span>, 3, 0);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'62070000'</span>, <span class="string">'海洋石油（洋浦）船务有限公司'</span>, 2, 0);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'08011500'</span>, <span class="string">'中海散货运输(香港)有限公司'</span>, 23, 6);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'62000000'</span>, <span class="string">'大连中远海运油品运输有限公司'</span>, 2, 0);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'66020000'</span>, <span class="string">'青岛远洋运输有限公司'</span>, 54, 8);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'08010800'</span>, <span class="string">'天津中海华润航运有限公司'</span>, 13, 4);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'080200000000'</span>, <span class="string">'中远海运能源运输股份有限公司'</span>, 116, 10);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'53030000'</span>, <span class="string">'中燃航运（大连）有限责任公司'</span>, 2, 0);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'3100000011'</span>, <span class="string">'天津中散船舶管理有限公司'</span>, 9, 2);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'08260000'</span>, <span class="string">'大连中石油海运有限公司'</span>, 8, 2);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'53000000'</span>, <span class="string">'中国船舶燃料有限责任公司'</span>, 1, 0);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'88000000'</span>, <span class="string">'东方海外货柜航运有限公司'</span>, 99, 8);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'68930000'</span>, <span class="string">'上海浦海航运有限公司'</span>, 9, 2);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'13000000'</span>, <span class="string">'中远海运（上海）有限公司'</span>, 3, 0);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'53040000'</span>, <span class="string">'中国船舶燃料河北有限公司'</span>, 1, 0);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'53020000'</span>, <span class="string">'中国船舶燃料大连有限公司'</span>, 5, 2);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'71010000'</span>, <span class="string">'COSCO SHIPPING (SINGAPORE) PTE LTD'</span>, 3, 0);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'62210000'</span>, <span class="string">'Pan Cosmos Shipping &amp; Enterprises Co.,Limited'</span>, 2, 0);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'68281100'</span>, <span class="string">'上海国际轮渡有限公司'</span>, 1, 0);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'08011200'</span>, <span class="string">'中海散货运输(上海)有限公司'</span>, 28, 6);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'63000000'</span>, <span class="string">'中远海运（厦门）有限公司'</span>, 11, 4);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'65000000'</span>, <span class="string">'中远海运特种运输股份有限公司'</span>, 98, 8);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'65050000'</span>, <span class="string">'海南中远海运沥青运输有限公司'</span>, 17, 4);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'11170000'</span>, <span class="string">'广州海运物资供应公司'</span>, 2, 0);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'01000000'</span>, <span class="string">'中远海运发展股份有限公司'</span>, 200, 10);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'99090000'</span>, <span class="string">'南京丝路达航运有限公司'</span>, 2, 0);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'62090000'</span>, <span class="string">'深圳中远龙鹏液化气运输有限公司'</span>, 5, 2);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'08030101'</span>, <span class="string">'中国能源船舶管理有限公司'</span>, 3, 0);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'64000000'</span>, <span class="string">'中波轮船股份有限公司'</span>, 7, 2);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'01170000'</span>, <span class="string">'中海集装箱运输(洋浦)有限公司'</span>, 1, 0);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'03090000'</span>, <span class="string">'中海海盛香港船务有限公司'</span>, 2, 0);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'08020000'</span>, <span class="string">'上海中远海运油品运输有限公司'</span>, 16, 4);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'68280000'</span>, <span class="string">'上海远洋运输有限公司'</span>, 219, 10);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'08110000'</span>, <span class="string">'深圳市三鼎油运贸易有限公司'</span>, 2, 0);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'04000000'</span>, <span class="string">'中远海运船员管理有限公司'</span>, 44, 6);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'02000000'</span>, <span class="string">'中远海运客运有限公司'</span>, 10, 4);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'08010700'</span>, <span class="string">'神华中海航运有限公司'</span>, 2, 0);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'04220000'</span>, <span class="string">'上海时代航运有限公司'</span>, 1, 0);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'68280600'</span>, <span class="string">'上海远洋船舶管理有限公司'</span>, 24, 6);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'66030000'</span>, <span class="string">'深圳远洋运输股份有限公司'</span>, 174, 10);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'08270000'</span>, <span class="string">'台州中油海运有限公司'</span>, 6, 2);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'99070000'</span>, <span class="string">'福建省海运集团有限责任公司'</span>, 11, 4);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'66000000'</span>, <span class="string">'中远海运散货运输有限公司'</span>, 254, 10);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'66040000'</span>, <span class="string">'中远(香港)航运有限公司'</span>, 27, 6);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'08040000'</span>, <span class="string">'华海石油运销有限公司'</span>, 3, 0);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'08150000'</span>, <span class="string">'上海北海船务股份有限公司'</span>, 13, 4);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'08015100'</span>, <span class="string">'中海散运(香港)维利有限公司'</span>, 1, 0);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'62160000'</span>, <span class="string">'大连华洋船务有限公司'</span>, 1, 0);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'08010000'</span>, <span class="string">'中海散货运输有限公司'</span>, 85, 8);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'08010500'</span>, <span class="string">'广州京海航运有限公司'</span>, 12, 4);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'19190600'</span>, <span class="string">'中国能源船舶管理有限公司'</span>, 3, 0);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'53280000'</span>, <span class="string">'上海中燃船舶燃料有限公司'</span>, 6, 2);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'01220000'</span>, <span class="string">'鑫海航运有限公司'</span>, 8, 2);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'53170000'</span>, <span class="string">'舟山中燃船舶燃料有限公司'</span>, 2, 0);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'53140000'</span>, <span class="string">'南京中燃船舶燃料有限责任公司'</span>, 2, 0);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'64060000'</span>, <span class="string">'上海中波国际船舶管理有限公司'</span>, 6, 2);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'66010000'</span>, <span class="string">'中远散货运输有限公司'</span>, 82, 8);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'04100000'</span>, <span class="string">'中海液化气船舶管理（上海）有限公司'</span>, 1, 0);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'08011100'</span>, <span class="string">'上海时代航运有限公司'</span>, 1, 0);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'68282100'</span>, <span class="string">'中日国际轮渡有限公司'</span>, 1, 0);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'72000000'</span>, <span class="string">'中远航务(英国)公司'</span>, 7, 2);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'06090000'</span>, <span class="string">'广州振兴船务有限公司'</span>, 1, 0);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'11000000'</span>, <span class="string">'中石化中海船舶燃料供应有限公司'</span>, 7, 2);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'05000000'</span>, <span class="string">'中海工业有限公司'</span>, 4, 0);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'08010300'</span>, <span class="string">'上海银桦航运有限公司'</span>, 1, 0);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'03020100'</span>, <span class="string">'深圳市三鼎油运贸易有限公司'</span>, 2, 0);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'03020200'</span>, <span class="string">'广东海电船务有限公司'</span>, 2, 0);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'91020000'</span>, <span class="string">'海南港航拖轮有限公司'</span>, 8, 2);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'66190000'</span>, <span class="string">'海南海盛航运有限公司'</span>, 2, 0);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'06160000'</span>, <span class="string">'广东海电船务有限公司'</span>, 2, 0);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'53190000'</span>, <span class="string">'中国船舶燃料广州有限公司'</span>, 7, 2);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'53090000'</span>, <span class="string">'中国船舶燃料青岛有限公司'</span>, 3, 0);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'08100000'</span>, <span class="string">'中国矿运有限公司'</span>, 4, 0);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'91010000'</span>, <span class="string">'海南海峡航运股份有限公司'</span>, 19, 4);</span><br><span class="line">INSERT INTO `tdf_SHIPSIZE` VALUES (<span class="string">'3300000005'</span>, <span class="string">'大连中远海运船舶管理有限公司'</span>, 2, 0);</span><br><span class="line"></span><br><span class="line">SET FOREIGN_KEY_CHECKS = 1;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 找Grade第二名</span></span><br><span class="line">select * from tdf_SHIPSIZE <span class="built_in">where</span> GRADE = (select max(GRADE) from </span><br><span class="line">(select * from tdf_SHIPSIZE <span class="built_in">where</span> GRADE &lt; (SELECT MAX(GRADE) from tdf_SHIPSIZE)) </span><br><span class="line">as temp)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 找Grade第三名</span></span><br><span class="line">select * from tdf_SHIPSIZE <span class="built_in">where</span> GRADE = </span><br><span class="line">(select max(GRADE) from </span><br><span class="line">(select * from tdf_SHIPSIZE <span class="built_in">where</span> GRADE &lt; </span><br><span class="line">(select max(GRADE) from tdf_SHIPSIZE <span class="built_in">where</span> GRADE = (select max(GRADE) from </span><br><span class="line">(select * from tdf_SHIPSIZE <span class="built_in">where</span> GRADE &lt; (SELECT MAX(GRADE) from tdf_SHIPSIZE)) </span><br><span class="line">as temp1)))</span><br><span class="line">as temp2)</span><br><span class="line"></span><br><span class="line"><span class="comment"># RANK并列跳跃排名，并列即相同的值，相同的值保留重复名次，遇到下一个不同值时，跳跃到总共的排名。</span></span><br><span class="line"><span class="comment"># DENSE_RANK并列连续排序，相同的值保留重复名次，遇到下一个不同值时，依然按照连续数字排名。</span></span><br><span class="line"><span class="comment"># ROW_NUMBER连续排名，即使相同的值，依旧按照连续数字进行排名。</span></span><br><span class="line">SELECT GRADE,RANK() OVER (ORDER BY GRADE DESC) ranking FROM tdf_SHIPSIZE;</span><br><span class="line">SELECT GRADE,DENSE_RANK() OVER (ORDER BY GRADE DESC) ranking FROM tdf_SHIPSIZE;</span><br><span class="line">SELECT GRADE,ROW_NUMBER() OVER (ORDER BY GRADE DESC) ranking FROM tdf_SHIPSIZE;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 找Grade第二名</span></span><br><span class="line">SELECT t1.* from tdf_SHIPSIZE t1 join </span><br><span class="line">(SELECT COMPANY_CODE,GRADE,DENSE_RANK() OVER (ORDER BY GRADE DESC) ranking </span><br><span class="line">FROM tdf_SHIPSIZE) t2 on t1.COMPANY_CODE = t2.COMPANY_CODE </span><br><span class="line"><span class="built_in">where</span> t1.GRADE = t2.GRADE and t2.ranking = 2</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

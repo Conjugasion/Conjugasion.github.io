@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Lucas">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Spring常用注解"/>
+  <meta property="og:description" content="" />
+  <meta property="og:site_name" content="Sakura"/>
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="http://yoursite.com"/>
+  
+    <link rel="alternate" href="/atom.xml" title="Sakura" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>Sakura</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/image25.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">Spring常用注解</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/Conjugasion" target="_blank" rel="noopener">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By Lucas</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2019-12-11</span>
+            <span class="time">19:40:26</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/Spring/">Spring</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Spring/">#Spring</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <h3 id="声明bean的注解"><a href="#声明bean的注解" class="headerlink" title="声明bean的注解"></a>声明bean的注解</h3><ol>
+<li><p>@Component 组件，没有明确的角色<br>@component和@configuration作为配置类时的区别</p>
+<blockquote>
+<p>@Configuration 注解的 bean 类都会被代理增强，因此调用该方法返回的都是<strong>同一个实例</strong>。<br>@Configuration 注解本质上还是 @Component，因此 &lt;context:component-scan/&gt; 或者 @ComponentScan 都能处理@Configuration 注解的类。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Target(ElementType.TYPE)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Documented</span><br><span class="line">@Component</span><br><span class="line">public @interface Configuration &#123;</span><br><span class="line">    String value() default <span class="string">""</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>案例描述<br>@Bean 注解方法执行策略</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class MyBeanConfig &#123;</span><br><span class="line"> </span><br><span class="line">    @Bean</span><br><span class="line">    public Country <span class="function"><span class="title">country</span></span>()&#123;</span><br><span class="line">        <span class="built_in">return</span> new Country();</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    @Bean</span><br><span class="line">    public UserInfo <span class="function"><span class="title">userInfo</span></span>()&#123;</span><br><span class="line">        <span class="built_in">return</span> new UserInfo(country());</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但是如果是变成@Component之后，此时返回的就不是一个实例了，每次都会创建一个实例<br>@Component 注解并没有通过 cglib 来代理@Bean 方法的调用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class MyBeanConfig &#123;</span><br><span class="line"> </span><br><span class="line">    @Bean</span><br><span class="line">    public Country <span class="function"><span class="title">country</span></span>()&#123;</span><br><span class="line">        <span class="built_in">return</span> new Country();</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    @Bean</span><br><span class="line">    public UserInfo <span class="function"><span class="title">userInfo</span></span>()&#123;</span><br><span class="line">        <span class="built_in">return</span> new UserInfo(country());</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>修正版本：用@Autowired 注入,可以保证使用的同一个 Country 实例。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class MyBeanConfig &#123;</span><br><span class="line"> </span><br><span class="line">    @Autowired</span><br><span class="line">    private Country country;</span><br><span class="line"> </span><br><span class="line">    @Bean</span><br><span class="line">    public Country <span class="function"><span class="title">country</span></span>()&#123;</span><br><span class="line">        <span class="built_in">return</span> new Country();</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    @Bean</span><br><span class="line">    public UserInfo <span class="function"><span class="title">userInfo</span></span>()&#123;</span><br><span class="line">        <span class="built_in">return</span> new UserInfo(country);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>@Service 在业务逻辑层使用（service层）</p>
+</li>
+<li><p>@Repository 在数据访问层使用（dao层）</p>
+</li>
+<li><p>@Controller 在展现层使用，控制器的声明（Controller）</p>
+</li>
+</ol>
+<h3 id="注入bean的注解"><a href="#注入bean的注解" class="headerlink" title="注入bean的注解"></a>注入bean的注解</h3><ol>
+<li><p>@Autowired：由Spring提供<br>@Autowired注解是按照类型（byType）装配依赖对象，默认情况下它要求依赖对象必须存在，如果允许null值，可以设置它的required属性为false。如果我们想使用按照名称（byName）来装配，可以结合@Qualifier注解一起使用。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public class TestServiceImpl &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    @Qualifier(<span class="string">"userDao"</span>)</span><br><span class="line">    private UserDao userDao; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>@Inject：由JSR-330提供</p>
+</li>
+<li><p>@Resource：由JSR-250提供</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class TestServiceImpl &#123;</span><br><span class="line">    // 下面两种@Resource只要使用一种即可</span><br><span class="line">    @Resource(name=<span class="string">"userDao"</span>, <span class="built_in">type</span>=<span class="string">"UserDao"</span>)</span><br><span class="line">    private UserDao userDao; // 用于字段上</span><br><span class="line">    </span><br><span class="line">    @Resource(name=<span class="string">"userDao"</span>, <span class="built_in">type</span>=<span class="string">"UserDao"</span>)</span><br><span class="line">    public void setUserDao(UserDao userDao) &#123; // 用于属性的setter方法上</span><br><span class="line">        this.userDao = userDao;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>① 如果同时指定了name和type，则从Spring上下文中找到唯一匹配的bean进行装配，找不到则抛出异常。</p>
+</li>
+</ol>
+<p>② 如果指定了name，则从上下文中查找名称（id）匹配的bean进行装配，找不到则抛出异常。</p>
+<p>③ 如果指定了type，则从上下文中找到类似匹配的唯一bean进行装配，找不到或是找到多个，都会抛出异常。</p>
+<p>④ 如果既没有指定name，又没有指定type，则自动按照byName方式进行装配；如果没有匹配，则回退为一个原始类型进行匹配，如果匹配则自动装配。</p>
+<h3 id="java配置类相关注解"><a href="#java配置类相关注解" class="headerlink" title="java配置类相关注解"></a>java配置类相关注解</h3><ol>
+<li>@Configuration 声明当前类为配置类，相当于xml形式的Spring配置（类上）<blockquote>
+<p>@Configuration用于定义配置类，可替换xml配置文件，被注解的类内部包含有一个或多个被@Bean注解的方法，这些方法将会被AnnotationConfigApplicationContext或AnnotationConfigWebApplicationContext类进行扫描，并用于构建bean定义，初始化Spring容器。<br>注意：@Configuration注解的配置类有如下要求：</p>
+<blockquote>
+<p>@Configuration不可以是final类型；<br>@Configuration不可以是匿名类；<br>嵌套的configuration必须是静态类。</p>
+</blockquote>
+</blockquote>
+</li>
+</ol>
+<p><strong>示例1</strong><br>@Configuration配置spring并启动spring容器<br>@Configuration标注在类上，相当于把该类作为spring的xml配置文件中的<beans>，作用为：配置spring容器(应用上下文)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">package com.dxz.demo.configuration;</span><br><span class="line"></span><br><span class="line">import org.springframework.context.annotation.Configuration;</span><br><span class="line"></span><br><span class="line">@Configuration</span><br><span class="line">public class TestConfiguration &#123;</span><br><span class="line">    public <span class="function"><span class="title">TestConfiguration</span></span>() &#123;</span><br><span class="line">        System.out.println(<span class="string">"TestConfiguration容器启动初始化。。。"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>相当于：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span>?&gt;</span><br><span class="line">&lt;beans xmlns=<span class="string">"http://www.springframework.org/schema/beans"</span> xmlns:xsi=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span><br><span class="line">    xmlns:context=<span class="string">"http://www.springframework.org/schema/context"</span> xmlns:jdbc=<span class="string">"http://www.springframework.org/schema/jdbc"</span>  </span><br><span class="line">    xmlns:jee=<span class="string">"http://www.springframework.org/schema/jee"</span> xmlns:tx=<span class="string">"http://www.springframework.org/schema/tx"</span></span><br><span class="line">    xmlns:util=<span class="string">"http://www.springframework.org/schema/util"</span> xmlns:task=<span class="string">"http://www.springframework.org/schema/task"</span> xsi:schemaLocation=<span class="string">"</span></span><br><span class="line"><span class="string">        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd</span></span><br><span class="line"><span class="string">        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd</span></span><br><span class="line"><span class="string">        http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd</span></span><br><span class="line"><span class="string">        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd</span></span><br><span class="line"><span class="string">        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd</span></span><br><span class="line"><span class="string">        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd</span></span><br><span class="line"><span class="string">        http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.0.xsd"</span> default-lazy-init=<span class="string">"false"</span>&gt;</span><br><span class="line"></span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure>
+<p>主方法进行测试：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">package com.dxz.demo.configuration;</span><br><span class="line"></span><br><span class="line">import org.springframework.context.ApplicationContext;</span><br><span class="line">import org.springframework.context.annotation.AnnotationConfigApplicationContext;</span><br><span class="line"></span><br><span class="line">public class TestMain &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        /* @Configuration注解的spring容器加载方式，用AnnotationConfigApplicationContext替换ClassPathXmlApplicationContext */</span><br><span class="line">        ApplicationContext context = new AnnotationConfigApplicationContext(TestConfiguration.class);</span><br><span class="line"></span><br><span class="line">        // 如果加载spring-context.xml文件：</span><br><span class="line">        // ApplicationContext context = new</span><br><span class="line">        // ClassPathXmlApplicationContext(<span class="string">"spring-context.xml"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果：<br><img src="/Spring%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/image1.jpg" alt="运行结果"></p>
+<p><strong>示例2</strong><br>@Configuration启动容器+@Bean注册Bean，@Bean下管理bean的生命周期<br>@Bean标注在方法上(返回某个实例的方法)，等价于spring的xml配置文件中的<bean>，作用为：注册bean对象</p>
+<p>bean类：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">package com.dxz.demo.configuration;</span><br><span class="line"></span><br><span class="line">public class TestBean &#123;</span><br><span class="line"></span><br><span class="line">    private String username;</span><br><span class="line">    private String url;</span><br><span class="line">    private String password;</span><br><span class="line"></span><br><span class="line">    public void <span class="function"><span class="title">sayHello</span></span>() &#123;</span><br><span class="line">        System.out.println(<span class="string">"TestBean sayHello..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String <span class="function"><span class="title">toString</span></span>() &#123;</span><br><span class="line">        <span class="built_in">return</span> <span class="string">"username:"</span> + this.username + <span class="string">",url:"</span> + this.url + <span class="string">",password:"</span> + this.password;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void <span class="function"><span class="title">start</span></span>() &#123;</span><br><span class="line">        System.out.println(<span class="string">"TestBean 初始化。。。"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void <span class="function"><span class="title">cleanUp</span></span>() &#123;</span><br><span class="line">        System.out.println(<span class="string">"TestBean 销毁。。。"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>配置类：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">package com.dxz.demo.configuration;</span><br><span class="line"></span><br><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line">import org.springframework.context.annotation.Configuration;</span><br><span class="line">import org.springframework.context.annotation.Scope;</span><br><span class="line"></span><br><span class="line">@Configuration</span><br><span class="line">public class TestConfiguration &#123;</span><br><span class="line">    public <span class="function"><span class="title">TestConfiguration</span></span>() &#123;</span><br><span class="line">        System.out.println(<span class="string">"TestConfiguration容器启动初始化。。。"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /* @Bean注解注册bean,同时可以指定初始化和销毁方法 */</span><br><span class="line">    /* @Bean(name=<span class="string">"testBean"</span>,initMethod=<span class="string">"start"</span>,destroyMethod=<span class="string">"cleanUp"</span>) */</span><br><span class="line">    @Bean</span><br><span class="line">    @Scope(<span class="string">"prototype"</span>)</span><br><span class="line">    public TestBean <span class="function"><span class="title">testBean</span></span>() &#123;</span><br><span class="line">        <span class="built_in">return</span> new TestBean();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>主方法测试类：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">package com.dxz.demo.configuration;</span><br><span class="line"></span><br><span class="line">import org.springframework.context.ApplicationContext;</span><br><span class="line">import org.springframework.context.annotation.AnnotationConfigApplicationContext;</span><br><span class="line"></span><br><span class="line">public class TestMain &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        /* @Configuration注解的spring容器加载方式，用AnnotationConfigApplicationContext替换ClassPathXmlApplicationContext */</span><br><span class="line">        ApplicationContext context = new AnnotationConfigApplicationContext(TestConfiguration.class);</span><br><span class="line"></span><br><span class="line">        /* 如果加载spring-context.xml文件：</span><br><span class="line">        ApplicationContext context = new</span><br><span class="line">        ClassPathXmlApplicationContext(<span class="string">"spring-context.xml"</span>); */</span><br><span class="line">        </span><br><span class="line">        /* 获取bean */</span><br><span class="line">        TestBean tb = (TestBean) context.getBean(<span class="string">"testBean"</span>);</span><br><span class="line">        tb.sayHello();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果：<br><img src="/Spring%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/image2.jpg" alt="运行结果"><br>注：<br>(1)、@Bean注解在返回实例的方法上，如果未通过@Bean指定bean的名称，则默认与标注的方法名相同；<br>(2)、@Bean注解默认作用域为单例singleton作用域，可通过@Scope(“prototype”)设置为原型作用域；<br>(3)、既然@Bean的作用是注册bean对象，那么完全可以使用@Component、@Controller、@Service、@Ripository等注解注册bean，当然需要配置@ComponentScan注解进行自动扫描。</p>
+<p><strong>示例3</strong><br>@Configuration启动容器+@Component注册Bean<br>bean类：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">package com.dxz.demo.configuration;</span><br><span class="line"></span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line">//添加注册bean的注解</span><br><span class="line">@Component</span><br><span class="line">public class TestBean &#123;</span><br><span class="line"></span><br><span class="line">    private String username;</span><br><span class="line">    private String url;</span><br><span class="line">    private String password;</span><br><span class="line"></span><br><span class="line">    public void <span class="function"><span class="title">sayHello</span></span>() &#123;</span><br><span class="line">        System.out.println(<span class="string">"TestBean sayHello..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String <span class="function"><span class="title">toString</span></span>() &#123;</span><br><span class="line">        <span class="built_in">return</span> <span class="string">"username:"</span> + this.username + <span class="string">",url:"</span> + this.url + <span class="string">",password:"</span> + this.password;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void <span class="function"><span class="title">start</span></span>() &#123;</span><br><span class="line">        System.out.println(<span class="string">"TestBean 初始化。。。"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void <span class="function"><span class="title">cleanUp</span></span>() &#123;</span><br><span class="line">        System.out.println(<span class="string">"TestBean 销毁。。。"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>配置类：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">package com.dxz.demo.configuration;</span><br><span class="line"></span><br><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line">import org.springframework.context.annotation.ComponentScan;</span><br><span class="line">import org.springframework.context.annotation.Configuration;</span><br><span class="line">import org.springframework.context.annotation.Scope;</span><br><span class="line"></span><br><span class="line">@Configuration</span><br><span class="line">//添加自动扫描注解，basePackages为TestBean包路径</span><br><span class="line">@ComponentScan(basePackages = <span class="string">"com.dxz.demo.configuration"</span>)</span><br><span class="line">public class TestConfiguration &#123;</span><br><span class="line">    public <span class="function"><span class="title">TestConfiguration</span></span>() &#123;</span><br><span class="line">        System.out.println(<span class="string">"TestConfiguration容器启动初始化。。。"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /* @Bean注解注册bean,同时可以指定初始化和销毁方法 */</span><br><span class="line">    @Bean(name=<span class="string">"testNean"</span>,initMethod=<span class="string">"start"</span>,destroyMethod=<span class="string">"cleanUp"</span>)</span><br><span class="line">    @Bean</span><br><span class="line">    @Scope(<span class="string">"prototype"</span>)</span><br><span class="line">    public TestBean <span class="function"><span class="title">testBean</span></span>() &#123;</span><br><span class="line">        <span class="built_in">return</span> new TestBean();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>主方法测试获取bean对象：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">package com.dxz.demo.configuration;</span><br><span class="line"></span><br><span class="line">import org.springframework.context.ApplicationContext;</span><br><span class="line">import org.springframework.context.annotation.AnnotationConfigApplicationContext;</span><br><span class="line"></span><br><span class="line">public class TestMain &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        /* @Configuration注解的spring容器加载方式，用AnnotationConfigApplicationContext替换ClassPathXmlApplicationContext */</span><br><span class="line">        ApplicationContext context = new AnnotationConfigApplicationContext(TestConfiguration.class);</span><br><span class="line"></span><br><span class="line">        /* 如果加载spring-context.xml文件：</span><br><span class="line">         ApplicationContext context = new</span><br><span class="line">         ClassPathXmlApplicationContext(<span class="string">"spring-context.xml"</span>);*/</span><br><span class="line">        </span><br><span class="line">        /* 获取bean */</span><br><span class="line">        TestBean tb = (TestBean) context.getBean(<span class="string">"testBean"</span>);</span><br><span class="line">        tb.sayHello();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>sayHello()方法都被正常调用。<br>结果：<br><img src="/Spring%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/image3.jpg" alt="运行结果"></p>
+<ol start="2">
+<li><p>@Bean 注解在方法上，声明当前方法的返回值为一个bean，替代xml中的方式（方法上）</p>
+</li>
+<li><p>@Configuration 声明当前类为配置类，其中内部组合了@Component注解，表明这个类是一个bean（类上）</p>
+</li>
+<li><p>@ComponentScan 用于对Component进行扫描，相当于xml中的（类上）</p>
+</li>
+<li><p>@WishlyConfiguration 为@Configuration与@ComponentScan的组合注解，可以替代这两个注解</p>
+</li>
+</ol>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Lucas">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="hexo搭建博客"/>
+  <meta property="og:description" content="" />
+  <meta property="og:site_name" content="Sakura"/>
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="http://yoursite.com"/>
+  
+    <link rel="alternate" href="/atom.xml" title="Sakura" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>Sakura</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/image4.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">hexo搭建博客</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/Conjugasion" target="_blank" rel="noopener">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By Lucas</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2019-12-09</span>
+            <span class="time">19:40:26</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/Blog/">Blog</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Hexo/">#Hexo</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <h3 id="1、安装Node-js和配置好Node-js环境。下载链接如下："><a href="#1、安装Node-js和配置好Node-js环境。下载链接如下：" class="headerlink" title="1、安装Node.js和配置好Node.js环境。下载链接如下："></a><strong>1、安装Node.js和配置好Node.js环境。下载链接如下：</strong></h3><p><a href="https://nodejs.org/zh-cn/download/" target="_blank" rel="noopener">Node.js下载</a></p>
+<p>找到DOWNLOADS,我的是win10系统，所以下载Windows版本。</p>
+<p><img src="/establish-blog-resource/image1.jpg" alt=""></p>
+<p>下载完之后一路无脑安装就好，环境变量会自动配置，安装完成后，打开cmd命令行，成功界面如下。注意：如果提示不是内部或外部命令，把cmd关了重新打开就好了。</p>
+<p><img src="/establish-blog-resource/image2.jpg" alt=""></p>
+<h3 id="2、安装Git和配置好Git环境，安装成功的象征就是在电脑上任何位置鼠标右键能够出现如下两个选择。"><a href="#2、安装Git和配置好Git环境，安装成功的象征就是在电脑上任何位置鼠标右键能够出现如下两个选择。" class="headerlink" title="2、安装Git和配置好Git环境，安装成功的象征就是在电脑上任何位置鼠标右键能够出现如下两个选择。"></a><strong>2、安装Git和配置好Git环境，安装成功的象征就是在电脑上任何位置鼠标右键能够出现如下两个选择。</strong></h3><p><img src="/establish-blog-resource/image3.jpg" alt=""></p>
+<p>配置环境变量，成功配置的界面如图：</p>
+<p><img src="/establish-blog-resource/image4.jpg" alt=""></p>
+<h3 id="3、Github账户注册和新建项目，项目必须要遵守格式：账户名-github-io，不然接下来会有很多麻烦。并且需要勾选Initialize-this-repository-with-a-README。"><a href="#3、Github账户注册和新建项目，项目必须要遵守格式：账户名-github-io，不然接下来会有很多麻烦。并且需要勾选Initialize-this-repository-with-a-README。" class="headerlink" title="3、Github账户注册和新建项目，项目必须要遵守格式：账户名.github.io，不然接下来会有很多麻烦。并且需要勾选Initialize this repository with a README。"></a><strong>3、Github账户注册和新建项目，项目必须要遵守格式：账户名.github.io，不然接下来会有很多麻烦。并且需要勾选Initialize this repository with a README。</strong></h3><p><img src="/establish-blog-resource/image5.jpg" alt=""></p>
+<p>在建好的项目右侧有个settings按钮，点击它，向下拉到GitHub Pages，你会看到那边有个网址，访问它，你将会惊奇的发现该项目已经被部署到网络上，能够通过外网来访问它。</p>
+<p><img src="/establish-blog-resource/image6.jpg" alt=""></p>
+<h3 id="4、安装Hexo，在自己认为合适的地方创个文件夹，我是在F盘建了一个blog文件夹。然后通过命令行进入到该文件夹里面"><a href="#4、安装Hexo，在自己认为合适的地方创个文件夹，我是在F盘建了一个blog文件夹。然后通过命令行进入到该文件夹里面" class="headerlink" title="4、安装Hexo，在自己认为合适的地方创个文件夹，我是在F盘建了一个blog文件夹。然后通过命令行进入到该文件夹里面"></a><strong>4、安装Hexo，在自己认为合适的地方创个文件夹，我是在F盘建了一个blog文件夹。然后通过命令行进入到该文件夹里面</strong></h3><p><img src="/establish-blog-resource/image7.jpg" alt=""></p>
+<p>输入npm install hexo -g，开始安装Hexo</p>
+<p><img src="/establish-blog-resource/image8.jpg" alt=""></p>
+<p>输入hexo -v，检查hexo是否安装成功</p>
+<p><img src="/establish-blog-resource/image9.jpg" alt=""></p>
+<p>输入hexo init，初始化该文件夹,最近Github好像有点问题，访问速度异常的慢，中间还失败了一次，所以这一步时间有点长，慢慢等。</p>
+<p><img src="/establish-blog-resource/image10.jpg" alt=""></p>
+<p><img src="/establish-blog-resource/image11.jpg" alt=""></p>
+<p>输入npm install，安装所需要的组件</p>
+<p><img src="/establish-blog-resource/image12.jpg" alt=""></p>
+<p>输入hexo g，首次体验Hexo</p>
+<p><img src="/establish-blog-resource/image13.jpg" alt=""></p>
+<p>输入hexo s，开启服务器，访问该网址，正式体验Hexo</p>
+<p><img src="/establish-blog-resource/image14.jpg" alt=""></p>
+<p>在浏览器打开<a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a> 出现如下图就成功了，体验Hexo，极简的风格，很棒。</p>
+<p><img src="/establish-blog-resource/image15.jpg" alt=""></p>
+<p>问题：假如页面一直无法跳转，那么可能端口被占用了。此时我们ctrl+c停止服务器，接着输入“hexo server -p 端口号”来改变端口号</p>
+<p><img src="/establish-blog-resource/image16.jpg" alt=""></p>
+<p>然后在浏览器打开新的地址 <a href="http://localhost:5000/" target="_blank" rel="noopener">http://localhost:5000/</a></p>
+<h3 id="5、将Hexo与Github-page联系起来，设置Git的user-name和email"><a href="#5、将Hexo与Github-page联系起来，设置Git的user-name和email" class="headerlink" title="5、将Hexo与Github page联系起来，设置Git的user name和email"></a><strong>5、将Hexo与Github page联系起来，设置Git的user name和email</strong></h3><p><img src="/establish-blog-resource/image17.jpg" alt=""></p>
+<p>上图是在我的F盘blog文件夹里面鼠标右键，点击Git Base Here。配置自己的用户名和邮箱</p>
+<p>输入cd ~/.ssh，检查是否有.ssh的文件夹</p>
+<p><img src="/establish-blog-resource/image18.jpg" alt=""></p>
+<p>我的显示没有.ssh文件夹</p>
+<p>输入ssh-keygen -t rsa -C “<a href="mailto:tdf516020608@163.com" target="_blank" rel="noopener">tdf516020608@163.com</a>”，连续三个或四个回车，生成密钥，最后得到了两个文件：id_rsa和id_rsa.pub（默认存储路径是：C\Users\tdf51.ssh）。</p>
+<p><img src="/establish-blog-resource/image19.jpg" alt=""></p>
+<p>输入eval “$(ssh-agent -s)”，添加密钥到ssh-agent</p>
+<p><img src="/establish-blog-resource/image20.jpg" alt=""></p>
+<p>再输入ssh-add ~/.ssh/id_rsa，添加生成的SSH key到ssh-agent</p>
+<p><img src="/establish-blog-resource/image21.jpg" alt=""></p>
+<p>登录Github，点击头像下的settings，添加ssh</p>
+<p><img src="/establish-blog-resource/image22.jpg" alt=""></p>
+<p>新建一个new ssh key，将id_rsa.pub文件里的内容复制上去</p>
+<p><img src="/establish-blog-resource/image23.jpg" alt=""></p>
+<p>输入ssh -T <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>，测试添加ssh是否成功。如果看到Hi后面是你的用户名，就说明成功了</p>
+<p><img src="/establish-blog-resource/image24.jpg" alt=""></p>
+<p>问题：假如ssh-key配置失败，那么只要以下步骤就能完全解决</p>
+<p>首先，清除所有的key-pair</p>
+<p>ssh-add -D</p>
+<p>rm -r ~/.ssh</p>
+<p>删除你在github中的public-key</p>
+<p>重新生成ssh密钥对</p>
+<p>ssh-keygen -t rsa -C “<a href="mailto:xxx@xxx.com" target="_blank" rel="noopener">xxx@xxx.com</a>“</p>
+<p>接下来正常操作</p>
+<p>在github上添加公钥public-key:</p>
+<p>Ⅰ、打开 c ~/.ssh/id_rsa.pub 复制公钥内容</p>
+<p>Ⅱ、在github上添加公钥时，直接粘贴即可</p>
+<p>Ⅲ、保存</p>
+<p>测试：</p>
+<p>在终端 ssh -T <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a></p>
+<h3 id="6、配置Deployment，在其文件夹中，找到-config-yml文件，修改repo值（在末尾）"><a href="#6、配置Deployment，在其文件夹中，找到-config-yml文件，修改repo值（在末尾）" class="headerlink" title="6、配置Deployment，在其文件夹中，找到_config.yml文件，修改repo值（在末尾）"></a><strong>6、配置Deployment，在其文件夹中，找到_config.yml文件，修改repo值（在末尾）</strong></h3><p><img src="/establish-blog-resource/image25.jpg" alt=""></p>
+<p>repo值是你在github项目里的ssh（右下角）</p>
+<p><img src="/establish-blog-resource/image26.jpg" alt=""></p>
+<h3 id="7、新建一篇博客，在cmd执行命令：hexo-new-post-“博客名”"><a href="#7、新建一篇博客，在cmd执行命令：hexo-new-post-“博客名”" class="headerlink" title="7、新建一篇博客，在cmd执行命令：hexo new post “博客名”"></a><strong>7、新建一篇博客，在cmd执行命令：hexo new post “博客名”</strong></h3><p><img src="/establish-blog-resource/image27.jpg" alt=""></p>
+<p>这时候在文件夹_posts目录下将会看到已经创建的文件</p>
+<p><img src="/establish-blog-resource/image28.jpg" alt=""></p>
+<p>在生成以及部署文章之前，需要安装一个扩展：npm install hexo-deployer-git –save</p>
+<p><img src="/establish-blog-resource/image29.jpg" alt=""></p>
+<p>使用编辑器编好文章，那么就可以使用命令：hexo d -g，生成以及部署了</p>
+<p>title、date、tags之类的：后面一定要有一个空格！否则会报下图的错误：</p>
+<p><img src="/establish-blog-resource/image30.jpg" alt=""></p>
+<p>hexo d -g，成功！</p>
+<p><img src="/establish-blog-resource/image31.jpg" alt=""></p>
+<p>部署成功后访问你的地址：http://用户名.github.io。那么将看到生成的文章。</p>
+<p><img src="/establish-blog-resource/image31.jpg" alt=""></p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

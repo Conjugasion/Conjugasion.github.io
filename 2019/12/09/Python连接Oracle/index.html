@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Lucas">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Python连接Oracle"/>
+  <meta property="og:description" content="" />
+  <meta property="og:site_name" content="Sakura"/>
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="http://yoursite.com"/>
+  
+    <link rel="alternate" href="/atom.xml" title="Sakura" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>Sakura</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/image2.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">Python连接Oracle</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/Conjugasion" target="_blank" rel="noopener">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By Lucas</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2019-12-09</span>
+            <span class="time">19:40:26</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/Python/">Python</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Python/">#Python</a> <a class="tag" href="/tags/Oracle/">#Oracle</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <h3 id="安装模块"><a href="#安装模块" class="headerlink" title="安装模块"></a>安装模块</h3><p>使用第三方模块 <code>cx_Oracle</code></p>
+<h3 id="连接方式"><a href="#连接方式" class="headerlink" title="连接方式"></a>连接方式</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import cx_Oracle as cx</span><br><span class="line"> </span><br><span class="line"><span class="comment">#第一种 账号 密码 ip：端口号/SID</span></span><br><span class="line">conn = cx.connect(<span class="string">'csbc'</span>, <span class="string">'csbc'</span>, <span class="string">'10.18.2.89:1521/cbgl'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#第二种</span></span><br><span class="line">conn = cx.connect(<span class="string">'csbc/csbc@10.18.2.89:1521/cbgl'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#第三种</span></span><br><span class="line">dsn = cx.makedsn(<span class="string">'10.18.2.89'</span>, <span class="string">'1521'</span>, <span class="string">'cbgl'</span>)</span><br><span class="line"></span><br><span class="line">conn = cx.connect(<span class="string">'csbc'</span>, <span class="string">'csbc'</span>, dsn)</span><br></pre></td></tr></table></figure>
+<h3 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">import cx_Oracle as cx</span><br><span class="line"> </span><br><span class="line">con = cx.connect(&apos;csbc&apos;, &apos;csbc&apos;, &apos;10.18.2.89:1521/cbgl&apos;)</span><br><span class="line"></span><br><span class="line">cursor = con.cursor()       #创建游标</span><br><span class="line"></span><br><span class="line">cursor.execute(&quot;select * from TDER where ID=&apos;28&apos;&quot;)  #执行sql语句</span><br><span class="line"></span><br><span class="line">sql = &quot;replace into tdf_SKYEYE values(%s, %s, %s, %s)&quot;    #SQL占位符</span><br><span class="line">cursor.execute(sql, (变量1, 变量2, 变量3, 变量4))</span><br><span class="line">conn.commit()     #新增、修改、删除操作需要commit()</span><br><span class="line"></span><br><span class="line">data = cursor.fetchone()        #获取一条数据 获取所有数据fetchall()</span><br><span class="line"></span><br><span class="line">print(data)     #打印数据</span><br><span class="line"></span><br><span class="line">cursor.close()  #关闭游标</span><br><span class="line"></span><br><span class="line">con.close()     #关闭数据库连接</span><br></pre></td></tr></table></figure>
+<h3 id="windows下使用注意"><a href="#windows下使用注意" class="headerlink" title="windows下使用注意"></a>windows下使用注意</h3><p>windows下需要安装Oracle客户端<code>Instant Client</code>，要选择适配Oracle版本的instantclient</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from v$version</span><br></pre></td></tr></table></figure>
+<p>1) 下载链接：<a href="https://www.oracle.com/technetwork/cn/database/features/instant-client/index-092699-zhs.html" target="_blank" rel="noopener">instantclient</a><br>2) 解压到一个目录，并添加到环境变量</p>
+<div style="text-align:center">
+<img src="/Python-Oracle/image1.png">
+</div>
+<br />
+
+<div style="text-align:center">
+<img src="/Python-Oracle/image2.png">
+</div>
+<br />
+
+<p>3) 将instantclient文件夹下的<code>oci.dll</code>、<code>oraocci11.dll</code>、<code>oraociei11.dll</code>拷贝到<code>Python主目录\Lib\site-packages</code></p>
+<h3 id="环境变量NLS-LANG"><a href="#环境变量NLS-LANG" class="headerlink" title="环境变量NLS_LANG"></a>环境变量NLS_LANG</h3><p>如果不设置<code>NLS_LANG</code>，可能会导致Python程序读取的中文数据变成？？？？<br>先看一下Oracle数据库当前的编码方式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select userenv(&apos;language&apos;) from dual</span><br></pre></td></tr></table></figure>
+<p>方法1：在系统环境变量设置NLS_LANG，值等于查询出来的结果，比如<code>SIMPLIFIED CHINESE_CHINA.UTF8</code>、<code>SIMPLIFIED CHINESE_CHINA.ZHS16GBK</code><br>方法2: 在Python程序中设定</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import os</span><br><span class="line"></span><br><span class="line">os.environ[&apos;NLS_LANG&apos;] = &apos;SIMPLIFIED CHINESE_CHINA.ZHS16GBK&apos;</span><br></pre></td></tr></table></figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

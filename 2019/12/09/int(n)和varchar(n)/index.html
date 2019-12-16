@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Lucas">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="int(n)和varchar(n)含义"/>
+  <meta property="og:description" content="" />
+  <meta property="og:site_name" content="Sakura"/>
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="http://yoursite.com"/>
+  
+    <link rel="alternate" href="/atom.xml" title="Sakura" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>Sakura</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/image12.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">int(n)和varchar(n)含义</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/Conjugasion" target="_blank" rel="noopener">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By Lucas</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2019-12-09</span>
+            <span class="time">19:40:26</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/Mysql/">Mysql</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Mysql/">#Mysql</a> <a class="tag" href="/tags/Mysql%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">#Mysql数据类型</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <div style="text-align:center">
+<img src="/int(n)和varchar(n)/image4.png">
+</div>
+<br />
+
+<div style="text-align:center">
+<img src="/int(n)和varchar(n)/image5.png">
+</div>
+
+<h3 id="int-n"><a href="#int-n" class="headerlink" title="int(n)"></a><strong>int(n)</strong></h3><p>● 不管n是多少，int(n)是长度为32位二进制整数，在没有勾选“无符号”的情况下，能表示的整数范围是<code>-2^31-1</code>到<code>2^31-1(2147483647)</code>。在勾选“无符号”的情况下，整数范围是<code>0</code>到<code>2^32-1(4294967295)</code>；<br>● n的定义与存储空间没有任何关系，底层存储还是4个字节。<br>● int(n)主要体现在勾选“填充零”之后的区别。若指定数据类型为int(4)，存储<code>18</code>(十进制)，查询数据库会显示<code>0018</code>(十进制)；若存储了18888，查询数据库依然显示18888，原样存储；<br>● 如果没有给它指定显式长度n，MySQL会为它指定一个默认值11，即int的最大十进制长度。</p>
+<div style="text-align:center">
+<img src="/int(n)和varchar(n)/image1.png">
+</div>
+
+<h3 id="varchar-n"><a href="#varchar-n" class="headerlink" title="varchar(n)"></a><strong>varchar(n)</strong></h3><p>● MySQL表 <strong>所有列占用空间总和&lt;=65535字节</strong><br>● varchar能占用的最大空间为65535字节，最大可存储汉字数 = <code>(65535-1-2)/3 = 21844</code>，减1是因为实际存储从第2个字节开始，减2是因为要在列表长度存储实际字符长度，除3是因为采用utf8编码；<br>如果当前表又设置了另一int字段，int字段占用4字节，所以此时varchar字段最大能设置的长度为<code>(65535-1-2-4)/3 = 21842</code><br>● MySQL4.0版本以下，varchar(20)，指的是20<code>字节</code>，如果存放UTF8汉字时，只能存6个(每个汉字3字节)，最大可以设定varchar(65535)；<br>● MySQL5.0版本以上，varchar(20)，指的是20<code>字符</code>，无论存放的是数字、字母还是UTF8汉字(每个汉字3字节)，最大可以设定varchar(21845)；</p>
+<h3 id="Mysql表主键长度约束"><a href="#Mysql表主键长度约束" class="headerlink" title="Mysql表主键长度约束"></a><strong>Mysql表主键长度约束</strong></h3><p>varchar格式的主键长度不超过767字节，所以在”utf8”格式下，主键长度最多767/3=255，在”utf8mb4”格式下，主键长度最多767/4=191；<br>int格式的主键长度表示的是”显示长度”，不代表占用空间大小，所以理论上长度没限制，但是Mysql规定最多显示长度255。</p>
+<div style="text-align:center">
+<img src="/int(n)和varchar(n)/image2.png">
+</div>
+<br />
+
+<div style="text-align:center">
+<img src="/int(n)和varchar(n)/image3.png">
+</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

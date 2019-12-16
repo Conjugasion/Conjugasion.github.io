@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Lucas">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Spring之FactoryBean类"/>
+  <meta property="og:description" content="" />
+  <meta property="og:site_name" content="Sakura"/>
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="http://yoursite.com"/>
+  
+    <link rel="alternate" href="/atom.xml" title="Sakura" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>Sakura</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/image20.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">Spring之FactoryBean类</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/Conjugasion" target="_blank" rel="noopener">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By Lucas</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2019-12-11</span>
+            <span class="time">19:40:26</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/Spring/">Spring</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Spring/">#Spring</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <h3 id="FactoryBean"><a href="#FactoryBean" class="headerlink" title="FactoryBean"></a><strong>FactoryBean</strong></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">package org.springframework.beans.factory;</span><br><span class="line"></span><br><span class="line">public interface FactoryBean&lt;T&gt; &#123;</span><br><span class="line">    T getObject() throws Exception;</span><br><span class="line"></span><br><span class="line">    Class&lt;?&gt; getObjectType();</span><br><span class="line"></span><br><span class="line">    boolean isSingleton();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>FactoryBean</code>接口主要用来创建一些不能直接new出来的对象，原理是实现FactoryBean接口，加入泛型，实现接口中的方法。通过getObject()方法来获得所需对象。</p>
+<p>1.编写实体类(以JDBC中的Connection为例)，这里不需要编写。</p>
+<p>2.编写自定义FactoryBean 实现FactoryBean接口，并且加入要创建对象的泛型,实现接口中的方法。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">public class ConnFactoryBean implements FactoryBean&lt;Connection&gt;&#123;</span><br><span class="line">    private String driver;</span><br><span class="line">    private String url;</span><br><span class="line">    private String username;</span><br><span class="line">    private String password;</span><br><span class="line">	--此方法用来创建对象--</span><br><span class="line">    @Override</span><br><span class="line">    public Connection getObject() throws Exception &#123;  </span><br><span class="line">        Class.forName(driver);</span><br><span class="line">        Connection con=DriverManager.getConnection(url, username, password);</span><br><span class="line">        <span class="built_in">return</span> con; </span><br><span class="line">    &#125;</span><br><span class="line">    @Override</span><br><span class="line">    public Class&lt;?&gt; <span class="function"><span class="title">getObjectType</span></span>() &#123;</span><br><span class="line">        // TODO Auto-generated method stub</span><br><span class="line">        <span class="built_in">return</span> null;</span><br><span class="line">    &#125;</span><br><span class="line">	--返回值为<span class="literal">false</span>的话，说明对象是多例的，每次使用都会创建一个新的对象--</span><br><span class="line">    @Override</span><br><span class="line">    public boolean <span class="function"><span class="title">isSingleton</span></span>() &#123;    </span><br><span class="line">        // TODO Auto-generated method stub</span><br><span class="line">        <span class="built_in">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    public String <span class="function"><span class="title">getDriver</span></span>() &#123;</span><br><span class="line">        <span class="built_in">return</span> driver;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setDriver(String driver) &#123;</span><br><span class="line">        this.driver = driver;</span><br><span class="line">    &#125;</span><br><span class="line">    public String <span class="function"><span class="title">getUrl</span></span>() &#123;</span><br><span class="line">        <span class="built_in">return</span> url;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setUrl(String url) &#123;</span><br><span class="line">        this.url = url;</span><br><span class="line">    &#125;</span><br><span class="line">    public String <span class="function"><span class="title">getUsername</span></span>() &#123;</span><br><span class="line">        <span class="built_in">return</span> username;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setUsername(String username) &#123;</span><br><span class="line">        this.username = username;</span><br><span class="line">    &#125;</span><br><span class="line">    public String <span class="function"><span class="title">getPassword</span></span>() &#123;</span><br><span class="line">        <span class="built_in">return</span> password;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setPassword(String password) &#123;</span><br><span class="line">        this.password = password;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3.将编写的类在applicationContext.xml中注册。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id=<span class="string">"ConnFactoryBean"</span> class=<span class="string">"com.com.jd.Connection"</span>&gt;</span><br><span class="line">	&lt;property name=<span class="string">"driver"</span> value=<span class="string">"<span class="variable">$&#123;jdbc.driver&#125;</span>"</span>&gt;&lt;/property&gt;</span><br><span class="line">	&lt;property name=<span class="string">"url"</span> value=<span class="string">"<span class="variable">$&#123;jdbc.url&#125;</span>"</span>&gt;&lt;/property&gt;</span><br><span class="line">	&lt;property name=<span class="string">"username"</span> value=<span class="string">"<span class="variable">$&#123;jdbc.username&#125;</span>"</span>&gt;&lt;/property&gt;</span><br><span class="line">	&lt;property name=<span class="string">"password"</span> value=<span class="string">"<span class="variable">$&#123;jdbc.password&#125;</span>"</span>&gt;&lt;/property&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+
+<p>4.在测试类中进行测试，获得Connection。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">        </span><br><span class="line">        ApplicationContext context = new ClassPathXmlApplicationContext(<span class="string">"classpath:applicationContext.xml"</span>);</span><br><span class="line">  </span><br><span class="line">        Connection conn = (Connection)context.getBean(<span class="string">"connFactoryBean"</span>);</span><br><span class="line"></span><br><span class="line">        System.out.println(conn);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

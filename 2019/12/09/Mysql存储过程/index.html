@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Lucas">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="Mysql的存储过程"/>
+  <meta property="og:description" content="" />
+  <meta property="og:site_name" content="Sakura"/>
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="http://yoursite.com"/>
+  
+    <link rel="alternate" href="/atom.xml" title="Sakura" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>Sakura</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/image11.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">Mysql的存储过程</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/Conjugasion" target="_blank" rel="noopener">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By Lucas</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2019-12-09</span>
+            <span class="time">19:40:26</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/Mysql/">Mysql</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Mysql/">#Mysql</a> <a class="tag" href="/tags/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/">#存储过程</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <h3 id="navicat书写存储过程踩坑"><a href="#navicat书写存储过程踩坑" class="headerlink" title="navicat书写存储过程踩坑"></a><strong>navicat书写存储过程踩坑</strong></h3><p>● navicat已经自动设定delimiter不为；，所以在navicat中书写存储过程不用在开头修改结束符delimiter // or $$，但是如果在Mysql命令行里书写存储过程，需要变更结束符。<br>● navicat书写存储过程的格式，有时候缩进会导致莫名其妙报错，所以可以试试不缩进。<br>● int类型可以不设置长度和default默认值，varchar类型可以不设定default默认值，但是必须指定长度。</p>
+<h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a><strong>定义</strong></h3><p><code>存储过程</code>(Stored Procedure)是在大型数据库系统中，一组为了完成特定功能的SQL语句集，存储在数据库中，经过第一次编译后调用不需要再次编译，用户通过指定存储过程的名字并给出参数(如果该存储过程带有参数)来执行它。存储过程是数据库中的一个重要对象。</p>
+<h3 id="存储过程的特点"><a href="#存储过程的特点" class="headerlink" title="存储过程的特点"></a><strong>存储过程的特点</strong></h3><p>● 能完成较复杂的判断和运算<br>● 可编程性强，灵活<br>● SQL编程的代码可重复使用<br>● 执行的速度相对快一些<br>● 减少网络之间的数据传输，节省开销   </p>
+<h3 id="创建存储过程的语法"><a href="#创建存储过程的语法" class="headerlink" title="创建存储过程的语法"></a><strong>创建存储过程的语法</strong></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">create procedure 名称()</span><br><span class="line">begin</span><br><span class="line">.........</span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
+<p><strong>示例</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">create procedure test1()</span><br><span class="line">begin</span><br><span class="line">    select * from users;</span><br><span class="line">    select * from orders;</span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
+<p><strong>调用存储过程</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">call test1();</span><br></pre></td></tr></table></figure>
+<h3 id="存储过程的变量"><a href="#存储过程的变量" class="headerlink" title="存储过程的变量"></a><strong>存储过程的变量</strong></h3><p><strong>变量声明和赋值</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">create procedure test2()</span><br><span class="line">begin</span><br><span class="line">  -- 使用 <span class="built_in">declare</span>语句声明一个变量</span><br><span class="line">  <span class="built_in">declare</span> userName varchar(32) default <span class="string">''</span>;</span><br><span class="line">  -- 使用<span class="built_in">set</span>语句给变量赋值</span><br><span class="line">  <span class="built_in">set</span> userName=<span class="string">'xiaoxiao'</span>;</span><br><span class="line">  -- 将users表中id=1的名称赋值给userName</span><br><span class="line">  select name into userName from users <span class="built_in">where</span> id=1;</span><br><span class="line">  -- 返回变量</span><br><span class="line">  select userName;</span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
+<p><strong>总结</strong></p>
+<p>●  <strong>变量一定要声明在begin-end块内的最前面，不然会报错！</strong><br>●  变量的声明使用declare,一句declare只声明一个变量，变量必须先声明后使用;<br>●  变量具有数据类型和长度，与mysql的SQL数据类型保持一致，因此甚至还能设定默认值、字符集和排序规则;<br>●  变量可以通过set来赋值，也可以通过select into的方式赋值;<br>●  变量需要返回，可以使用select语句，如：<code>select 变量名</code>。</p>
+<h3 id="变量作用域"><a href="#变量作用域" class="headerlink" title="变量作用域"></a><strong>变量作用域</strong></h3><p><strong>说明</strong><br>● 存储过程中变量是有作用域的，作用范围在begin和end块之间，end结束变量的作用范围即结束。<br>● 需要多个块之间传值，可以使用全局变量，即放在所有代码块之前<br>● 传参变量是全局的，可以在多个块之间起作用</p>
+<p><strong>示例</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">create procedure test3()</span><br><span class="line">begin</span><br><span class="line">  begin</span><br><span class="line">    <span class="built_in">declare</span> userscount int default 0; -- 用户表中的数量</span><br><span class="line">    <span class="built_in">declare</span> ordercount int default 0; -- 订单表中的数量</span><br><span class="line">    select count(*) into userscount from users;</span><br><span class="line">    select count(*) into ordercount from orders;</span><br><span class="line">    select userscount,ordercount; -- 返回用户表中的数量、订单表中的数量</span><br><span class="line">  end;</span><br><span class="line">  begin </span><br><span class="line">    <span class="built_in">declare</span> maxmoney int default 0; -- 最大金额</span><br><span class="line">    <span class="built_in">declare</span> minmoney int default 0; -- 最小金额</span><br><span class="line">    select max(money) into maxmoney from orders;</span><br><span class="line">    select min(money) into minmoney from orders;</span><br><span class="line">    select maxmoney,minmoney; -- 返回最金额、最小金额</span><br><span class="line">   end;</span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
+<div style="text-align:center">
+<img src="/Mysql_stored_procedure/image1.png">
+</div>
+<br />
+
+<div style="text-align:center">
+<img src="/Mysql_stored_procedure/image2.png">
+</div>
+<br />
+若test3()改为如下：
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">create procedure test3()</span><br><span class="line">    begin</span><br><span class="line">      begin</span><br><span class="line">        <span class="built_in">declare</span> userscount int default 0; -- 用户表中的数量</span><br><span class="line">        <span class="built_in">declare</span> ordercount int default 0; -- 订单表中的数量</span><br><span class="line">        select count(*) into userscount from users;</span><br><span class="line">        select count(*) into ordercount from orders;</span><br><span class="line">        select userscount,ordercount; -- 返回用户表中的数量、订单表中的数量</span><br><span class="line">      end;</span><br><span class="line">      begin </span><br><span class="line">        <span class="built_in">declare</span> maxmoney int default 0; -- 最大金额</span><br><span class="line">        <span class="built_in">declare</span> minmoney int default 0; -- 最小金额</span><br><span class="line">        select max(money) into maxmoney from orders;</span><br><span class="line">        select min(money) into minmoney from orders;</span><br><span class="line">        select userscount,ordercount，maxmoney,minmoney; -- 返回最金额、最小金额</span><br><span class="line">       end;</span><br><span class="line">    end;</span><br></pre></td></tr></table></figure>
+<div style="text-align:center">
+<img src="/Mysql_stored_procedure/image3.png">
+</div>
+<br />
+将userscount,ordercount改为全局变量，再次验证：
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">create procedure test3()</span><br><span class="line">    begin</span><br><span class="line"></span><br><span class="line">        <span class="built_in">declare</span> userscount int default 0; -- 用户表中的数量</span><br><span class="line">        <span class="built_in">declare</span> ordercount int default 0; -- 订单表中的数量</span><br><span class="line">        begin</span><br><span class="line">            select count(*) into userscount from users;</span><br><span class="line">            select count(*) into ordercount from orders;</span><br><span class="line">            select userscount,ordercount; -- 返回用户表中的数量、订单表中的数量</span><br><span class="line">      end;</span><br><span class="line">      begin </span><br><span class="line">        <span class="built_in">declare</span> maxmoney int default 0; -- 最大金额</span><br><span class="line">        <span class="built_in">declare</span> minmoney int default 0; -- 最小金额</span><br><span class="line">        select max(money) into maxmoney from orders;</span><br><span class="line">        select min(money) into minmoney from orders;</span><br><span class="line">        select userscount,ordercount，maxmoney,minmoney; -- 返回最金额、最小金额</span><br><span class="line">       end;</span><br><span class="line">    end;</span><br></pre></td></tr></table></figure>
+<div style="text-align:center">
+<img src="/Mysql_stored_procedure/image4.png">
+</div>
+<br />
+
+<div style="text-align:center">
+<img src="/Mysql_stored_procedure/image5.png">
+</div>
+
+<p><strong>存储过程中变量的作用域，作用范围在begin和end块之间，end结束变量的作用范围即结束</strong></p>
+<h3 id="存储过程参数"><a href="#存储过程参数" class="headerlink" title="存储过程参数"></a><strong>存储过程参数</strong></h3><p>存储过程的参数类型有：<code>IN</code>,<code>OUT</code>,<code>INOUT</code><br><strong>基本语法</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">create procedure 名称([IN|OUT|INOUT] 参数名 参数数据类型)</span><br><span class="line">begin</span><br><span class="line">.........</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<p><strong>传入参数IN</strong><br>● 传入参数IN必须在调用存储过程事指定，如果不显示指定为in,那么默认就是in类型。<br>● in类型参数一般只用于传入，在调用过程中一般不作为修改和返回；<br>● 如果调用存储过程中需要修改和返回值，可以使用OUT类型参数。<br><strong>示例</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> create procedure test4(userId int)</span><br><span class="line">    begin</span><br><span class="line">            <span class="built_in">declare</span> userName varchar(32) default <span class="string">''</span>;</span><br><span class="line">            <span class="built_in">declare</span> ordercount int default 0;</span><br><span class="line">            select name into userName from users <span class="built_in">where</span> id=userId;</span><br><span class="line">            select userName;</span><br><span class="line">    end;</span><br></pre></td></tr></table></figure>
+<div style="text-align:center">
+<img src="/Mysql_stored_procedure/image6.png">
+</div>
+
+<p><strong>传出参数OUT</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">调用存储过程时，传入userId返回该用户的name</span><br><span class="line">        create procedure test5(<span class="keyword">in</span> userId int,out userName varchar(32))</span><br><span class="line">        begin</span><br><span class="line">            select name into userName from users <span class="built_in">where</span> id=userId;</span><br><span class="line">        end;</span><br></pre></td></tr></table></figure>
+<div style="text-align:center">
+<img src="/Mysql_stored_procedure/image8.png">
+</div>
+
+<p><strong>总结</strong><br>● 传出参数OUT在调用存储过程中，可以改变其值，并可返回；<br>● out是传出参数，不能用于传入参数值；<br>● 调用存储过程时，out参数也需要指定，但必须是变量，不能是常量；<br>● 如果既需要传入，同时又需要传出，则可以使用INOUT类型参数。</p>
+<p><strong>可变参数INOUT</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">调用存储过程时，传入参数userId，userName既是传入参数，也是传出参数。</span><br><span class="line">create procedure test6(inout userId int,inout userName varchar(32))</span><br><span class="line">begin</span><br><span class="line">    <span class="built_in">set</span> userId=2;</span><br><span class="line">    <span class="built_in">set</span> userName=<span class="string">''</span>;</span><br><span class="line">    select id,name into userId,userName from users <span class="built_in">where</span> id=userId;</span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
+<div style="text-align:center">
+<img src="/Mysql_stored_procedure/image9.png">
+</div>
+
+<p><strong>总结</strong><br>● 可变变量INOUT调用时可传入值，在调用过程中，可修改其值，同时也可返回值；<br>● INOUT参数集合了IN和OUT类型的参数功能；<br>● INOUT调用时传入的是变量，而不是常量。</p>
+<h3 id="存储过程条件语句"><a href="#存储过程条件语句" class="headerlink" title="存储过程条件语句"></a><strong>存储过程条件语句</strong></h3><p><strong>基本语法</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(条件) <span class="keyword">then</span></span><br><span class="line">  ......</span><br><span class="line">elseif(条件) <span class="keyword">then</span></span><br><span class="line">  ......</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  ......</span><br><span class="line">end <span class="keyword">if</span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例1</strong><br>编写存储过程，如果用户userId是偶数则返回userName,否则返回userId</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">create procedure test7(<span class="keyword">in</span> userId int)</span><br><span class="line">begin</span><br><span class="line">   <span class="built_in">declare</span> userName varchar(32) default <span class="string">''</span>;</span><br><span class="line">   <span class="keyword">if</span>(userId%2=0)</span><br><span class="line">   <span class="keyword">then</span> </span><br><span class="line">      select name into userName from users <span class="built_in">where</span> id=userId;</span><br><span class="line">      select userName;</span><br><span class="line">   <span class="keyword">else</span></span><br><span class="line">      select userId;</span><br><span class="line">      end <span class="keyword">if</span>;</span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
+<div style="text-align:center">
+<img src="/Mysql_stored_procedure/image10.png">
+</div>
+<br />
+
+<div style="text-align:center">
+<img src="/Mysql_stored_procedure/image11.png">
+</div>
+
+<p><strong>示例2</strong><br>根据用户传入的uid参数判断,如果用户状态status为1，则给用户score加10分；如果用户状态status为2，则给用户score加20分；其他情况加30分</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">create procedure test8(<span class="keyword">in</span> userid int)</span><br><span class="line">begin</span><br><span class="line">   <span class="built_in">declare</span> my_status int default 0;</span><br><span class="line">   select status into my_status from users <span class="built_in">where</span> id=userid;</span><br><span class="line">   <span class="keyword">if</span>(my_status=1)</span><br><span class="line">   <span class="keyword">then</span> </span><br><span class="line">       update users <span class="built_in">set</span> score=score+10 <span class="built_in">where</span> id=userid;</span><br><span class="line">    elseif(my_status=2)</span><br><span class="line">    <span class="keyword">then</span> </span><br><span class="line">       update users <span class="built_in">set</span> score=score+20 <span class="built_in">where</span> id=userid;</span><br><span class="line">    <span class="keyword">else</span> </span><br><span class="line">       update users <span class="built_in">set</span> score=score+30 <span class="built_in">where</span> id=userid;</span><br><span class="line">    end <span class="keyword">if</span>;</span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
+<div style="text-align:center">
+<img src="/Mysql_stored_procedure/image12.png">
+</div>
+<br />
+
+<div style="text-align:center">
+<img src="/Mysql_stored_procedure/image13.png">
+</div>
+
+<h3 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a><strong>流程控制</strong></h3><p><strong>case分支</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">基本语法结构</span><br><span class="line">case ...</span><br><span class="line">	when ... then....</span><br><span class="line">	when.... then....</span><br><span class="line">	else ... </span><br><span class="line">end case;</span><br></pre></td></tr></table></figure>
+<p><strong>示例</strong><br>users表中，根据userid获取status值，如果status为1，则修改score为10；如果status为2，则修改为20，如果status3，则修改为30；否则修改为40。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> create procedure testcate(userid int)</span><br><span class="line">    begin </span><br><span class="line">        declare my_status int default 0;</span><br><span class="line">        select status into my_status from users where id=userid;</span><br><span class="line"> </span><br><span class="line">        case my_status</span><br><span class="line">            when 1 then update users set score=10 where id=userid;</span><br><span class="line">            when 2 then update users set score=20 where id=userid;</span><br><span class="line">            when 3 then update users set score=30 where id=userid;</span><br><span class="line">            else update users set score=40 where id=userid;</span><br><span class="line">        end case;</span><br><span class="line">    end;</span><br></pre></td></tr></table></figure>
+
+<div style="text-align:center">
+<img src="/Mysql_stored_procedure/image19.png">
+</div>
+
+
+
+<h3 id="存储过程循环语句"><a href="#存储过程循环语句" class="headerlink" title="存储过程循环语句"></a><strong>存储过程循环语句</strong></h3><p><strong>while语句</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">基本结构</span><br><span class="line"><span class="keyword">while</span>(表达式) <span class="keyword">do</span> </span><br><span class="line">   ......  </span><br><span class="line">end <span class="keyword">while</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>示例</strong><br>使用循环语句，向表test1(id)中插入10条连续的记录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">create procedure test9()</span><br><span class="line">begin</span><br><span class="line">  <span class="built_in">declare</span> i int default 0;</span><br><span class="line">  <span class="keyword">while</span>(i&lt;10) <span class="keyword">do</span> </span><br><span class="line">    begin </span><br><span class="line">        select i;</span><br><span class="line">        <span class="built_in">set</span> i=i+1;</span><br><span class="line">        insert into test1(id) values(i);</span><br><span class="line">     end;</span><br><span class="line">  end <span class="keyword">while</span>;</span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
+<div style="text-align:center">
+<img src="/Mysql_stored_procedure/image14.png">
+</div>
+<br />
+
+<div style="text-align:center">
+<img src="/Mysql_stored_procedure/image15.png">
+</div>
+
+<p><strong>repeat语句</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">基本结构</span><br><span class="line">repeat</span><br><span class="line">  ......</span><br><span class="line">until ...... end repeat;</span><br></pre></td></tr></table></figure>
+<p><strong>示例</strong><br>给test1表中的id字段插入数据，从1到10</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">create procedure test10()</span><br><span class="line">begin</span><br><span class="line">    <span class="built_in">declare</span> i int default 0;</span><br><span class="line">    repeat </span><br><span class="line">    begin </span><br><span class="line">        select i;</span><br><span class="line">        <span class="built_in">set</span> i=i+1;</span><br><span class="line">        insert into test1(id) values(i);</span><br><span class="line">    end;</span><br><span class="line">    until i&gt;=10 -- 如果i&gt;=10,则跳出循环</span><br><span class="line">    end repeat;</span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
+<h3 id="存储过程游标的使用"><a href="#存储过程游标的使用" class="headerlink" title="存储过程游标的使用"></a><strong>存储过程游标的使用</strong></h3><p><strong>游标是保存查询结果的临时区域</strong><br><strong>示例</strong><br>编写存储过程，使用游标，把users表中id为偶数的记录逐一更新用户名</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">create procedure test11()</span><br><span class="line">    begin</span><br><span class="line">        <span class="built_in">declare</span> stopflag int default 0;</span><br><span class="line">        <span class="built_in">declare</span> username VARCHAR(32);</span><br><span class="line">        -- 创建一个游标变量，格式: <span class="built_in">declare</span> 变量名 cursor ......</span><br><span class="line">        <span class="built_in">declare</span> username_cur cursor <span class="keyword">for</span> select name from users <span class="built_in">where</span> id%2=0;</span><br><span class="line">        -- 游标是保存查询结果的临时区域</span><br><span class="line">        -- 游标变量username_cur保存了查询的临时结果，实际上就是结果集</span><br><span class="line">        -- 当游标变量中保存的结果都查询一遍(遍历),到达结尾，将变量stopflag设置为1，用于循环中判断是否结束</span><br><span class="line">        <span class="built_in">declare</span> <span class="built_in">continue</span> handler <span class="keyword">for</span> not found <span class="built_in">set</span> stopflag=1;</span><br><span class="line"> </span><br><span class="line">        open username_cur; -- 打开游标</span><br><span class="line">        fetch username_cur into username; -- 游标向前走一步，取出一条记录放到变量username中</span><br><span class="line">        <span class="keyword">while</span>(stopflag=0) <span class="keyword">do</span> -- 如果游标还没有结尾，就继续</span><br><span class="line">            begin </span><br><span class="line">                -- 在用户名前门拼接 <span class="string">'_cur'</span> 字符串</span><br><span class="line">                update users <span class="built_in">set</span> name=CONCAT(username,<span class="string">'_cur'</span>) <span class="built_in">where</span> name=username;</span><br><span class="line">                fetch username_cur into username;</span><br><span class="line">            end;</span><br><span class="line">        end <span class="keyword">while</span>; -- 结束循环</span><br><span class="line">        close username_cur; -- 关闭游标</span><br><span class="line">    end;</span><br></pre></td></tr></table></figure>
+<div style="text-align:center">
+<img src="/Mysql_stored_procedure/image16.png">
+</div>
+
+<h3 id="自定义函数"><a href="#自定义函数" class="headerlink" title="自定义函数"></a><strong>自定义函数</strong></h3><p>● 函数与存储过程最大的区别是函数必须有返回值，否则会报错；<br>● 函数参数没有IN/OUT/INOUT之分，若在参数前加了IN/OUT/INOUT会报错。<br><strong>示例1</strong><br>向函数传入指定userid，返回对应的username</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">create <span class="keyword">function</span> getusername(userid int) returns varchar(32)</span><br><span class="line">    -- 从数据库中读取数据，但不修改数据</span><br><span class="line">    reads sql data  </span><br><span class="line">    begin</span><br><span class="line">        <span class="built_in">declare</span> username varchar(32) default <span class="string">''</span>;</span><br><span class="line">        select name into username from users <span class="built_in">where</span> id=userid;</span><br><span class="line">        <span class="built_in">return</span> username;</span><br><span class="line">    end;</span><br></pre></td></tr></table></figure>
+<div style="text-align:center">
+<img src="/Mysql_stored_procedure/image17.png">
+</div>
+
+<p><strong>示例2</strong><br>根据userid，获取accoutid,id,name组合成UUID作为用户的唯一标识</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">create <span class="keyword">function</span> getuuid(userid int) returns varchar(64)</span><br><span class="line">  reads sql data  -- 从数据库中读取数据，但不修改数据</span><br><span class="line">  begin</span><br><span class="line">      <span class="built_in">declare</span> uuid varchar(64) default <span class="string">''</span>;</span><br><span class="line">      select concat(accontid,<span class="string">'_'</span>,id,<span class="string">'_'</span>,name) into uuid from users <span class="built_in">where</span> id=userid;</span><br><span class="line">      <span class="built_in">return</span> uuid;</span><br><span class="line">  end;</span><br></pre></td></tr></table></figure>
+<div style="text-align:center">
+<img src="/Mysql_stored_procedure/image18.png">
+</div>
+
+<p><strong>Mysql创建函数的四个数据存取限制参数</strong><br>● <code>CONTAINS SQL</code>表示子程序不包含读或写数据的语句；<code>NO SQL</code>表示子程序不包含SQL语句；<code>READS SQL DATA</code>表示子程序包含读数据语句，但不包含写数据语句；<code>MODIFIES SQL DATA</code>表示子程序包含写数据语句；<br>● 如果没有明确给定，默认<code>CONTAINS SQL</code>；<br>● 具体写哪一个参数并不会真的限制下面的实际操作！</p>
+<p><strong>总结</strong><br>● 创建函数使用create function 函数名(参数) returns 返回类型；<br>● 函数体放在begin和end之间；<br>● returns指定函数的返回值，varchar要带长度；<br>● 函数调用使用<strong>select 函数名()</strong>。<br>mysql创建存储过程的时候发现有这么四个数据存取限制的参数，网上查了好久从官网得到如下结果</p>
+<h3 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a><strong>触发器</strong></h3><p>触发器是一种对象，它能根据对表的操作触发一些相应的动作，这些动作可以是insert,update,delete等操作。<br><strong>示例1</strong><br>出于审计目的，当有人往表users插入一条记录时，把插入的userid、username、插入动作和操作时间记录下来。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">create trigger tr_users_insert after insert on users</span><br><span class="line">    <span class="keyword">for</span> each row </span><br><span class="line">    begin </span><br><span class="line">        insert into oplog(userid,username,action,optime)</span><br><span class="line">        values(NEW.id,NEW.name,<span class="string">'insert'</span>,now());</span><br><span class="line">    end;</span><br></pre></td></tr></table></figure>
+<p>创建成功后，给uses表中插入一条记录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">insert into users(id,name,age,status,score,accontid) values(6,<span class="string">'小周'</span>,23,1,<span class="string">'60'</span>,<span class="string">'10001'</span>)；</span><br></pre></td></tr></table></figure>
+<div style="text-align:center">
+<img src="/Mysql_stored_procedure/image20.png">
+</div>
+
+<p><strong>示例2</strong><br>出于审计目的，当删除users表时，记录删除前该记录的主要字段值</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">create trigger tr_users_delete before delete on users</span><br><span class="line">    <span class="keyword">for</span> each row </span><br><span class="line">    begin </span><br><span class="line">        insert into oplog(userid,username,action,optime)</span><br><span class="line">        values(OLD.id,OLD.name,<span class="string">'delete'</span>,now());</span><br><span class="line">    end;</span><br></pre></td></tr></table></figure>
+<p>删除users表中的一条记录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">delete from users <span class="built_in">where</span> id=6;</span><br></pre></td></tr></table></figure>
+<div style="text-align:center">
+<img src="/Mysql_stored_procedure/image21.png">
+</div>
+
+<p><strong>总结</strong><br>● 创建触发器使用create trigger 触发器名 ……<br>● 什么时候触发？after/before insert on users,是在对表操作之前(before)或者之后(after)触发动作的。<br>● 对什么操作事件触发？ after insert on users,操作事件包括insert,update,delete等修改操作；<br>● 对什么表触发? after insert on users<br>● 影响的范围？for each row</p>
+<h3 id="存储过程-event-事件"><a href="#存储过程-event-事件" class="headerlink" title="存储过程+event(事件)"></a><strong>存储过程+event(事件)</strong></h3><p><strong>event的创建格式</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">-- 创建使用create event</span><br><span class="line">create event[IF NOT EXISTS]event_name</span><br><span class="line">    -- on schedule 什么时候来执行</span><br><span class="line">    ON SCHEDULE schedule </span><br><span class="line">    -- 调度计划执行完成后是否还保留</span><br><span class="line">    [ON COMPLETION [NOT] PRESERVE]</span><br><span class="line">    -- 是否开启事件，默认开启</span><br><span class="line">    [ENABLE | DISABLE]</span><br><span class="line">    -- 事件的注释</span><br><span class="line">    [COMMENT <span class="string">'comment'</span>]</span><br><span class="line">    -- 这个调度计划要做什么</span><br><span class="line">    DO sql_statement;</span><br></pre></td></tr></table></figure>
+<p><strong>执行时间说明</strong><br>● 单次计划任务示例<br>        在2019年2月1日4点执行一次<br>        on schedule at    ‘2019-02-01 04:00:00’</p>
+<p>● 重复计划执行<br>        on schedule every 1 second 每秒执行一次<br>        on schedule every 1 minute 每分钟执行一次<br>        on schedule every 1 day 没天执行一次</p>
+<p>● 指定时间范围的重复计划任务<br>        每天在20:00:00执行一次<br>        on schedule every 1 day starts ‘2019-02-01 20:00:00’</p>
+<p><strong>示例</strong><br>使用存储过程+事件事件一个简单的实现福彩3D开奖，每3分钟开奖一次。<br>第一步：先编写一个存储过程open_lottery,产生3个随机数，生成一条开奖记录。<br>第二步：编写一个时间调度器，每3分钟调用一次这个过程。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">create procedure open_lottery()</span><br><span class="line">        begin </span><br><span class="line">            insert into lottery(num1,num2,num3,ctime)</span><br><span class="line">            select FLOOR(rand()*9)+1,FLOOR(rand()*9)+1,FLOOR(rand()*9)+1,now();</span><br><span class="line">        end;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">create event <span class="keyword">if</span> not exists lottery_event -- 创建一个事件</span><br><span class="line">        on schedule every  3 minute  -- on schedule 什么时候来执行，没三分钟执行一次</span><br><span class="line">        on completion preserve </span><br><span class="line">        <span class="keyword">do</span> call open_lottery;</span><br></pre></td></tr></table></figure>
+
+<div style="text-align:center">
+<img src="/Mysql_stored_procedure/image22.png">
+</div>
+
+<p><strong>如果event之一没有运行，请按照以下办法解决</strong>：<br>● show variables like ‘%event_scheduler%’; set global event_scheduler=on;<br>● alert event lottery_event enable;</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

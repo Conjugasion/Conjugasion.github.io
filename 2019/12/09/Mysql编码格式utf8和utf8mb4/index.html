@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Lucas">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="不要在MySql中使用utf8"/>
+  <meta property="og:description" content="" />
+  <meta property="og:site_name" content="Sakura"/>
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="http://yoursite.com"/>
+  
+    <link rel="alternate" href="/atom.xml" title="Sakura" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>Sakura</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/image15.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">不要在MySql中使用utf8</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/Conjugasion" target="_blank" rel="noopener">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By Lucas</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2019-12-09</span>
+            <span class="time">19:40:26</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/Mysql/">Mysql</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Mysql/">#Mysql</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <h3 id="Mysql编码格式"><a href="#Mysql编码格式" class="headerlink" title="Mysql编码格式"></a><strong>Mysql编码格式</strong></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Incorrect string value: ‘ð &lt;…’ <span class="keyword">for</span> column ‘summary’ at row 1</span><br></pre></td></tr></table></figure>
+<p>我用的是UTF-8编码的客户端，服务器也是UTF-8编码的，数据库也是，就连要保存的这个字符串“😃”也是合法的UTF-8。<br><strong>问题的症结在于，MySQL的“utf8”实际上不是真正的UTF-8。</strong><br>MySql的”utf8”只支持每个字符最多三个字节，而真正的UTF-8是每个字符最多四个字节。</p>
+<p><strong>总结</strong><br>1.MySQL的“utf8mb4”是真正的“UTF-8”。<br>2.MySQL的“utf8”是一种“专属的编码”，它能够编码的Unicode字符并不多。</p>
+<h3 id="Mysql编码的排序规则"><a href="#Mysql编码的排序规则" class="headerlink" title="Mysql编码的排序规则"></a><strong>Mysql编码的排序规则</strong></h3><p>使用者首先要关心字符集与排序规则在db里的统一。<br><strong>准确性</strong>：<br>utf8mb4_unicode_ci 是基于标准的Unicode来排序和比较，能够在各种语言之间精确排序；<br>utf8mb4_general_ci 没有实现Unicode排序规则，在遇到某些特殊语言或者字符集，排序结果可能不一致。但是在绝大多数情况下，这些特殊字符的顺序并不需要那么精确。</p>
+<p><strong>性能</strong>：<br>utf8mb4_general_ci 在比较和排序的时候更快；<br>utf8mb4_unicode_ci 在特殊情况下，Unicode排序规则为了能够处理特殊字符的情况，实现了略微复杂的排序算法。但是在绝大多数情况下，不会发生此类复杂比较。</p>
+<h3 id="Mysql表主键长度约束"><a href="#Mysql表主键长度约束" class="headerlink" title="Mysql表主键长度约束"></a><strong>Mysql表主键长度约束</strong></h3><p>varchar格式的主键长度不超过767字节，所以在”utf8”格式下，主键长度最多767/3=255，在”utf8mb4”格式下，主键长度最多767/4=191；<br>int格式的主键长度表示的是”显示长度”，不代表占用空间大小，所以理论上没限制，但是Mysql规定最多显示长度255。</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+
