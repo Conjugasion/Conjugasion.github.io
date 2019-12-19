@@ -354,3 +354,22 @@ sayHello()方法都被正常调用。
 4. @ComponentScan 用于对Component进行扫描，相当于xml中的（类上）
 
 5. @WishlyConfiguration 为@Configuration与@ComponentScan的组合注解，可以替代这两个注解
+
+### 切面（AOP）相关注解
+
+Spring只支持XML方式而没有实现注解的方式（也叫AspectJ方式）的AOP，所以要使用@Aspect注解，只能引入AspectJ相关的 jar 包 aopalliance-1.0.jar 和 aspectjweaver.jar。
+
+@Aspect 声明一个切面（类上）
+
+使用@After、@Before、@Around定义通知（advice），可直接将拦截规则（切点）作为参数。
+
+@After 在方法执行之后执行（方法上）
+
+@Before 在方法执行之前执行（方法上）
+
+@Around 在方法执行之前与之后执行（方法上）
+
+@PointCut 声明切点
+
+在java配置类(Configuration)中使用@EnableAspectJAutoProxy注解开启Spring对AspectJ代理的支持（类上）
+
