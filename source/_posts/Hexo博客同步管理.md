@@ -65,7 +65,7 @@ public/
 ● github上切换到hexo分支，`git clone`仓库到本地。
 ● 此时本地会多出一个`username.github.io`文件夹，命令行cd进去，删除除.git文件夹（如果你看不到这个文件夹，说明是隐藏了。windows下需要右击文件夹内空白处，点选'显示/隐藏 异常文件'，Mac下我就不知道了）外的其他文件夹。
 ● 命令行`git add -A`把工作区的变化（包括已删除的文件）提交到暂存区（ps:`git add .`提交的变化不包括已删除的文件）。
-● 命令行`git commint -m "some description"`提交。
+● 命令行`git commit -m "some description"`提交。
 ● 命令行`git push origin hexo`推送到远程hexo分支。此时刷下github，如果正常操作，hexo分支应该已经被清空了。
 ● 复制本地`username.github.io`文件夹中的`.git`文件夹到hexo项目根目录下。此时，hexo项目已经变成了和远程hexo分支关联的本地仓库了。而`username.github.io`文件夹的使命到此为止，你可以把它删掉，因为我们只是把它作为一个“中转站”的角色。以后每次发布新文章或修改网站样式文件时，`git add . & git commit -m "some description" & git push origin hexo`即可把环境文件推送到hexo分支。然后再`hexo g -d`发布网站并推送静态文件到master分支。
 至此，hexo的环境文件已经全部托管在github的hexo分支了。
