@@ -1,7 +1,7 @@
 ---
 title: JD项目结构
-tag: [项目结构]
-category: 框架
+tag: [JD]
+category: JD
 excerpt: 各模块功能
 cover: /image20.jpg
 ---

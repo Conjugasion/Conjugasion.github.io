@@ -1,6 +1,6 @@
 ---
 title: git merge与git rebase的区别
-tag: Git
+tag: [Git]
 category: Git
 excerpt: 合并上的区别
 cover: /image18.jpg

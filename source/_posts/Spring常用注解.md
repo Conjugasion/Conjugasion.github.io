@@ -1,6 +1,6 @@
 ---
 title: Spring常用注解
-tag: Spring
+tag: [Spring]
 category: Spring
 excerpt: 常用注解释义
 cover: /image25.jpg

@@ -1,7 +1,7 @@
 ---
-title: int(n)和varchar(n)含义
-tag: [Mysql,Mysql数据类型]
-category: Mysql
+title: Mysql中int(n)和varchar(n)含义
+tag: [Sql]
+category: Sql
 excerpt: int类型和varchar类型
 cover: /image12.jpg
 ---

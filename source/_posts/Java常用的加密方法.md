@@ -1,7 +1,7 @@
 ---
 title: Java开发常用的加密算法
 tag: [加密算法]
-category: 算法
+category: 加密算法
 excerpt: 常用的信息加密算法
 cover: /image21.jpg
 ---

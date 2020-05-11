@@ -1,6 +1,6 @@
 ---
 title: Python连接Mysql
-tag: [Python,Mysql]
+tag: [Python]
 category: Python
 excerpt: 第三方库pymysql使用教程
 cover: /image1.jpg

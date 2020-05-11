@@ -1,6 +1,6 @@
 ---
 title: urllib和BeautifulSoup使用指南
-tag: [Python,urllib,BeautifulSoup,pymysql]
+tag: [Python]
 category: Python
 excerpt: 爬取天眼查的公司评分
 cover: /image5.jpg

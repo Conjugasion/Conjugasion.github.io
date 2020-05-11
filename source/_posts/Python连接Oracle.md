@@ -1,6 +1,6 @@
 ---
 title: Python连接Oracle
-tag: [Python,Oracle]
+tag: [Python]
 category: Python
 excerpt: 第三方库cx_Oracle，踩坑...
 cover: /image2.jpg

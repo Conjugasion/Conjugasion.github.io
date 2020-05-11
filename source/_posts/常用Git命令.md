@@ -1,6 +1,6 @@
 ---
 title: 常用Git命令
-tag: Git
+tag: [Git]
 category: Git
 excerpt: 菜鸟笔记
 cover: /image17.jpg

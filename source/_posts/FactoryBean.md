@@ -1,6 +1,6 @@
 ---
 title: Spring之FactoryBean类
-tag: Spring
+tag: [Spring]
 category: Spring
 excerpt: 学习FactoryBean
 cover: /image20.jpg

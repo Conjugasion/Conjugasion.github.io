@@ -1,6 +1,6 @@
 ---
 title: Sql聚合函数
-tag: Sql
+tag: [Sql]
 category: Sql
 excerpt: 当sql聚合函数count、avg、sum遇到null或者空字符时
 cover: /image16.jpg

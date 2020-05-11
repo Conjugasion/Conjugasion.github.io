@@ -1,7 +1,7 @@
 ---
 title: Mysql数据库开发规范
-tag: Mysql
-category: Mysql
+tag: [Sql]
+category: Sql
 excerpt: 高并发下的开发规范
 cover: /image17.jpg
 ---

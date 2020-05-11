@@ -1,7 +1,7 @@
 ---
 title: 不要在MySql中使用utf8
-tag: Mysql
-category: Mysql
+tag: [Sql]
+category: Sql
 excerpt: MySql编码格式、排序规则和主键长度约束
 cover: /image15.jpg
 ---

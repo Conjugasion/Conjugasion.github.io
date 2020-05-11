@@ -1,6 +1,6 @@
 ---
 title: VO,DTO,DO,PO的概念
-tag: Spring
+tag: [Spring]
 category: Spring
 excerpt: 名词释义
 cover: /image23.jpg

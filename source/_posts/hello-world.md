@@ -1,6 +1,6 @@
 ---
 title: Hello World
-tag: tag标签
+tag: [tag标签]
 category: category类别
 excerpt: excerpt摘录，博客教程
 ---

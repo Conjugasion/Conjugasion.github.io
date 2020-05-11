@@ -1,7 +1,7 @@
 ---
 title: Kafka架构和原理
-tag: Kafka
-category: 分布式
+tag: [Kafka]
+category: Kafka
 excerpt: 架构和原理学习
 cover: /image13.jpg
 ---

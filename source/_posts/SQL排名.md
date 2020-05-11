@@ -1,7 +1,7 @@
 ---
 title: Mysql排名函数
-tag: Mysql
-category: Mysql
+tag: [Sql]
+category: Sql
 excerpt: 取第几名的数据，RANK并列跳跃排名、DENSE_RANK并列连续排序、ROW_NUMBER连续排名
 cover: /image6.jpg
 ---

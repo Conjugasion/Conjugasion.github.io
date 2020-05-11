@@ -1,7 +1,7 @@
 ---
 title: Mysql的存储过程
-tag: [Mysql,存储过程]
-category: Mysql
+tag: [Sql]
+category: Sql
 excerpt: 存储过程入门
 cover: /image11.jpg
 ---

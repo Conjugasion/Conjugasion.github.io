@@ -1,7 +1,7 @@
 ---
 title: Hexo博客同步管理
-tag: [Hexo,Git]
-category: Blog
+tag: [Hexo]
+category: Hexo
 excerpt: 多机同步管理博客
 cover: /image3.jpg
 ---

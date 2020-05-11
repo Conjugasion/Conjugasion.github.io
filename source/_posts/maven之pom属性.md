@@ -1,6 +1,6 @@
 ---
 title: maven之pom属性
-tag: Maven
+tag: [Maven]
 category: Maven
 excerpt: pom.xml属性
 cover: /image21.jpg

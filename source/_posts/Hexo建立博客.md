@@ -1,7 +1,7 @@
 ---
 title: hexo搭建博客
-tag: Hexo
-category: Blog
+tag: [Hexo]
+category: Hexo
 excerpt: 使用Github搭建属于自己的博客
 cover: /image4.jpg
 ---

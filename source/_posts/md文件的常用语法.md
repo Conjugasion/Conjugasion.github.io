@@ -1,7 +1,7 @@
 ---
 title: md文件语法
-tag: md
-category: md
+tag: [Md]
+category: Md
 excerpt: 常用语法
 cover: /image22.jpg
 ---

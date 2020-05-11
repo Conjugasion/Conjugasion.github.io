@@ -1,6 +1,6 @@
 ---
 title: Spring中的AOP
-tag: Spring
+tag: [Spring]
 category: Spring
 excerpt: 切面、通知，目标方法
 cover: /image5.jpg

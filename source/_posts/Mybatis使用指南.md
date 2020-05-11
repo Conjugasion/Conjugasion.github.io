@@ -1,6 +1,6 @@
 ---
 title: Mybatis使用指南
-tag: Mybatis
+tag: [Mybatis]
 category: Mybatis
 excerpt: 详细教程
 cover: /image26.jpg
