@@ -92,7 +92,7 @@
           <!-- Date -->
           <span class="date-time info">On
             <span class="date">2019-12-11</span>
-            <span class="time">19:40:26</span>
+            <span class="time">16:20:15</span>
           </span>
           
           <!--  Categories  -->
@@ -188,6 +188,14 @@
 <li><p>@WishlyConfiguration 为@Configuration与@ComponentScan的组合注解，可以替代这两个注解</p>
 </li>
 </ol>
+<h3 id="切面（AOP）相关注解"><a href="#切面（AOP）相关注解" class="headerlink" title="切面（AOP）相关注解"></a>切面（AOP）相关注解</h3><p>Spring只支持XML方式而没有实现注解的方式（也叫AspectJ方式）的AOP，所以要使用@Aspect注解，只能引入AspectJ相关的 jar 包 aopalliance-1.0.jar 和 aspectjweaver.jar。</p>
+<p>@Aspect 声明一个切面（类上）</p>
+<p>使用@After、@Before、@Around定义通知（advice），可直接将拦截规则（切点）作为参数。</p>
+<p>@After 在方法执行之后执行（方法上）</p>
+<p>@Before 在方法执行之前执行（方法上）</p>
+<p>@Around 在方法执行之前与之后执行（方法上）</p>
+<p>@PointCut 声明切点</p>
+<p>在java配置类(Configuration)中使用@EnableAspectJAutoProxy注解开启Spring对AspectJ代理的支持（类上）</p>
 
         </div>
       </div>

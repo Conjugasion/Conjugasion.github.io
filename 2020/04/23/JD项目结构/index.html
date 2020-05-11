@@ -8,10 +8,10 @@
   <meta name="description" content="">
   <meta name="author" content="Lucas">
   <!-- Open Graph Data -->
-  <meta property="og:title" content="Sakura"/>
+  <meta property="og:title" content="JD项目结构"/>
   <meta property="og:description" content="" />
   <meta property="og:site_name" content="Sakura"/>
-  <meta property="og:type" content="website" />
+  <meta property="og:type" content="article" />
   <meta property="og:image" content="http://yoursite.com"/>
   
     <link rel="alternate" href="/atom.xml" title="Sakura" type="application/atom+xml">
@@ -35,16 +35,15 @@
 </head>
 
   <body>
-    <!-- Archive Header -->
-<!-- Page Header -->
+    <!-- Page Header -->
 
 
-<header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
+<header class="site-header header-background" style="background-image: url(/image20.jpg)">
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <div class="page-title with-background-image">
-          <p class="title">所有博客</p>
+          <p class="title">JD项目结构</p>
           <p class="subtitle"></p>
         </div>
         <div class="site-menu with-background-image">
@@ -81,34 +80,51 @@
   </div>
 </header>
 
-<!-- Archive List -->
-<div class="container">
-  <div class="row">
-    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-      
-        <div class="archive-item">
-  <a href="/2019/12/09/int(n)%E5%92%8Cvarchar(n)/" class="post-title">
-    int(n)和varchar(n)含义
-  </a>
-  <div class="date text-muted">Posted on 2019-12-09 20:43:15</div>
-</div>
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By Lucas</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2020-04-23</span>
+            <span class="time">16:20:15</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
 
-      
+<a href="/categories/JD/">JD</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
 
+<a class="tag" href="/tags/JD/">#JD</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <h3 id="api"><a href="#api" class="headerlink" title="api"></a><strong>api</strong></h3><p>关键包：controller、jsf(jsf接口的具体实现类)、service(又分为接口定义和具体impl)、util<br>jsf包下的xxxxServiceImpl类注入service包下的抽象接口，使用其对应实现类的方法完成具体功能实现。</p>
+<h3 id="backend"><a href="#backend" class="headerlink" title="backend"></a><strong>backend</strong></h3><p>jmq消费相关</p>
+<h3 id="client"><a href="#client" class="headerlink" title="client"></a><strong>client</strong></h3><p>关键包：constants(业务返回码的枚举类)、jsf(定义jsf接口和相应业务方法)、request、response</p>
+<h3 id="common"><a href="#common" class="headerlink" title="common"></a><strong>common</strong></h3><p>关键包：constants(常量的定义类、业务返回码的枚举类)、util</p>
+<h3 id="dao"><a href="#dao" class="headerlink" title="dao"></a><strong>dao</strong></h3><p>关键包：model(xxxx实体类)、mapper(xxxxMapper)</p>
+
+        </div>
+      </div>
     </div>
   </div>
-</div>
-<!-- Pagination -->
-<div class="container">
-  <div class="row">
-    <div class="col-lg-10 col-md-10 col-md-offset-1">
-      <ul class="pagination">
-          
-          
-      </ul>
-    </div>
-  </div>
-</div>
+</article>
 
 
 

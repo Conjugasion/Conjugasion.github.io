@@ -92,13 +92,13 @@
           <!-- Date -->
           <span class="date-time info">On
             <span class="date">2019-12-09</span>
-            <span class="time">19:40:26</span>
+            <span class="time">16:20:15</span>
           </span>
           
           <!--  Categories  -->
             <span class="categories info">Under 
 
-<a href="/categories/Blog/">Blog</a>
+<a href="/categories/Hexo/">Hexo</a>
 </span>
           
         </div>
@@ -107,7 +107,7 @@
           <div class="post-tags text-muted">
             Tags: 
 
-<a class="tag" href="/tags/Hexo/">#Hexo</a> <a class="tag" href="/tags/Git/">#Git</a>
+<a class="tag" href="/tags/Hexo/">#Hexo</a>
 
 
           </div>
@@ -132,7 +132,7 @@
 <br />
 
 <p>这里是比较关键的一步了，hexo分支是基于master分支的，它在创建时被赋予了与master分支同样的内容–静态文件。做乜啊，hexo分支不是要存放环境文件的吗？其实现在目的很清晰：<strong>我们希望hexo分支是空的，并把我们本地的hexo项目与hexo分支关联起来，好把环境文件推送过去。</strong>要达到这个目的，要分以下几步走：</p>
-<p>● github上切换到hexo分支，<code>git clone</code>仓库到本地。<br>● 此时本地会多出一个<code>username.github.io</code>文件夹，命令行cd进去，删除除.git文件夹（如果你看不到这个文件夹，说明是隐藏了。windows下需要右击文件夹内空白处，点选’显示/隐藏 异常文件’，Mac下我就不知道了）外的其他文件夹。<br>● 命令行<code>git add -A</code>把工作区的变化（包括已删除的文件）提交到暂存区（ps:<code>git add .</code>提交的变化不包括已删除的文件）。<br>● 命令行<code>git commint -m &quot;some description&quot;</code>提交。<br>● 命令行<code>git push origin hexo</code>推送到远程hexo分支。此时刷下github，如果正常操作，hexo分支应该已经被清空了。<br>● 复制本地<code>username.github.io</code>文件夹中的<code>.git</code>文件夹到hexo项目根目录下。此时，hexo项目已经变成了和远程hexo分支关联的本地仓库了。而<code>username.github.io</code>文件夹的使命到此为止，你可以把它删掉，因为我们只是把它作为一个“中转站”的角色。以后每次发布新文章或修改网站样式文件时，<code>git add . &amp; git commit -m &quot;some description&quot; &amp; git push origin hexo</code>即可把环境文件推送到hexo分支。然后再<code>hexo g -d</code>发布网站并推送静态文件到master分支。<br>至此，hexo的环境文件已经全部托管在github的hexo分支了。</p>
+<p>● github上切换到hexo分支，<code>git clone</code>仓库到本地。<br>● 此时本地会多出一个<code>username.github.io</code>文件夹，命令行cd进去，删除除.git文件夹（如果你看不到这个文件夹，说明是隐藏了。windows下需要右击文件夹内空白处，点选’显示/隐藏 异常文件’，Mac下我就不知道了）外的其他文件夹。<br>● 命令行<code>git add -A</code>把工作区的变化（包括已删除的文件）提交到暂存区（ps:<code>git add .</code>提交的变化不包括已删除的文件）。<br>● 命令行<code>git commit -m &quot;some description&quot;</code>提交。<br>● 命令行<code>git push origin hexo</code>推送到远程hexo分支。此时刷下github，如果正常操作，hexo分支应该已经被清空了。<br>● 复制本地<code>username.github.io</code>文件夹中的<code>.git</code>文件夹到hexo项目根目录下。此时，hexo项目已经变成了和远程hexo分支关联的本地仓库了。而<code>username.github.io</code>文件夹的使命到此为止，你可以把它删掉，因为我们只是把它作为一个“中转站”的角色。以后每次发布新文章或修改网站样式文件时，<code>git add . &amp; git commit -m &quot;some description&quot; &amp; git push origin hexo</code>即可把环境文件推送到hexo分支。然后再<code>hexo g -d</code>发布网站并推送静态文件到master分支。<br>至此，hexo的环境文件已经全部托管在github的hexo分支了。</p>
 <h3 id="新电脑中的环境搭建"><a href="#新电脑中的环境搭建" class="headerlink" title="新电脑中的环境搭建"></a><strong>新电脑中的环境搭建</strong></h3><p>这部分应该要简单一点，如果你已经搭建过一个hexo博客的话。</p>
 <p>● 新电脑上安装node.js和git。不赘述。git教程推荐<a href="https://www.liaoxuefeng.com/wiki/896043488029600" target="_blank" rel="noopener">廖雪峰老师</a>。<br>● 安装hexo：<code>npm install -g hexo-cli</code>。<br>● clone远程仓库到本地 <code>git clone git@github.com:username/username.github.io.git</code>。<br>● 根据packge.json安装依赖<code>npm install</code>。<br>● 本地生成网站并开启博客服务器：<code>hexo g &amp; hexo s</code>。如果一切正常，此时打开浏览器输入<code>http://localhost:4000/</code>已经可以看到博客正常运行了。</p>
 <h3 id="在两台电脑上的同步操作"><a href="#在两台电脑上的同步操作" class="headerlink" title="在两台电脑上的同步操作"></a><strong>在两台电脑上的同步操作</strong></h3><p>至此，迁移工作已完成，在两台电脑之间的同步操作如下：</p>
