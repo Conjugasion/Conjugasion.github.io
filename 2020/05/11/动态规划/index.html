@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Lucas">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="动态规划"/>
+  <meta property="og:description" content="" />
+  <meta property="og:site_name" content="Sakura"/>
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="http://yoursite.com"/>
+  
+    <link rel="alternate" href="/atom.xml" title="Sakura" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>Sakura</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/image20.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">动态规划</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/Conjugasion" target="_blank" rel="noopener">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By Lucas</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2020-05-11</span>
+            <span class="time">15:28:54</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/%E7%AE%97%E6%B3%95/">#算法</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>你有三种硬币，分别面值2元，5元和7元，每种硬币都有足够多。买一本书需要27元。如何用最少的硬币组合正好付清，不需要对方找钱？<br>关键词“用最小的硬币组合正好付清”——“最小的组合”，<strong>求最值问题，动态规划</strong>。</p>
+<p><strong>正常人第一反应思路</strong>:<br>最少硬币组合?<br>优先使用大面值硬币——7+7+7+5=26 额？可求解目标是27啊……<br>改算法——7+7+7+2+2+2=27，总共用了6枚硬币正好27元.<br>实际正确答案：7+5+5+5+5=27，才用了5枚硬币。<br><strong>所以这里贪心算法是不正确的</strong>。</p>
+<p>套路用起来。</p>
+<p><strong>第一步，确定问题状态</strong>。<br>动态规划问题求解需要先开一个数组，并确定数组的每个元素f[i]代表什么，就是确定这个问题的状态。<br>类似于解数学题中，设定X，Y，Z代表什么。</p>
+<p><strong>A、确定状态首先提取【最后一步】</strong></p>
+<p>最优策略必定是K枚硬币a1, a2,…, aK 面值加起来是27。</p>
+<p><strong>找出不影响最优策略的最后一个独立角色</strong>，这道问题中，那枚最后的硬币“aK”就是最后一步。<br>把aK提取出来，硬币aK之前的所有硬币面值加总是27- aK<br>因为总体求最硬币数量最小策略，所以拼出27- aK 的硬币数也一定最少（<strong>重要设定</strong>）。</p>
+<div style="text-align:center">
+<img src="/动态规划/image1.jpg">
+</div>
+<br/>
+
+<p><strong>B、转化子问题</strong>。<br>最后一步aK提出来之后，我们只要求出“最少用多少枚硬币可以拼出27- aK”就可以了。</p>
+<p><strong>这种与原问题内核一致，但是规模变小的问题，叫做子问题</strong>。</p>
+<p>为简化定义，我们设状态f(X)=最少用多少枚硬币拼出总面值X。<br>我们目前还不知道最后的硬币aK面额多少，但它的面额一定只可能是2/5/7之一。<br>如果aK是2，f(27)应该是f(27-2) + 1 (加上最后这一枚面值2的硬币）<br>如果aK是5，f(27)应该是f(27-5) + 1 (加上最后这一枚面值5的硬币）<br>如果aK是7，f(27)应该是f(27-7) + 1 (加上最后这一枚面值7的硬币）<br>除此以外，没有其他的可能了。</p>
+<p><strong>至此，通过找到原问题最后一步，并将其转化为子问题</strong>。<br><strong>为求面值总额27的最小的硬币组合数的状态就形成了，用以下函数表示</strong>：</p>
+<p>f(27) = min{f(27-2)+1, f(27-5)+1, f(27-7)+1}</p>
+<div style="text-align:center">
+<img src="/动态规划/image2.jpg">
+</div>
+<br/>
+
+<p><strong>第二步，转移方程，把问题方程化</strong>。</p>
+<p>f[X] = min{f[X-2]+1, f[X-5]+1, f[X-7]+1}<br>（动态规划都是要开数组，所以这里改用方括号表示）</p>
+<p>实际面试中求解动态规划类问题，正确列出转移方程正确基本上就解决一半了。</p>
+<p><strong>但是请问：这与递归有什么不同?</strong></p>
+<p>递归的解法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// f(X)返回最少用多少枚硬币拼出X                       </span><br><span class="line">int f(int X) &#123;  </span><br><span class="line">     // 0元钱只要0枚硬币                             </span><br><span class="line">     if (X == 0) return 0;        </span><br><span class="line">     // 初始化用无穷大（为什么是正无穷？）     </span><br><span class="line">     int res = MAX_VALUE;                     </span><br><span class="line">     // 最后一枚硬币是2元</span><br><span class="line">     if (X &gt;= 2) &#123;</span><br><span class="line">         res = Math.min(f(X – 2) + 1, res);       </span><br><span class="line">     &#125;</span><br><span class="line">      // 最后一枚硬币是5元</span><br><span class="line">     if (X &gt;= 5) &#123;</span><br><span class="line">        res =  Math.min(f(X – 5) + 1, res);     </span><br><span class="line">     &#125;</span><br><span class="line">     // 最后一枚硬币是7元</span><br><span class="line">     if (X &gt;= 7) &#123;      </span><br><span class="line">        res =  Math.min(f(X – 7) + 1, res);    </span><br><span class="line">     &#125;</span><br><span class="line">     return res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行图如下：</p>
+<div style="text-align:center">
+<img src="/动态规划/image3.jpg">
+</div>
+<br/>
+要算f(27)，就要递归f(25)、f(22)、f(20)，然后下边依次递归……（三角形表示）。
+<div style="text-align:center">
+<img src="/动态规划/image4.jpg">
+</div>
+<br/>
+**问题明显——重复递归太多**。
+
+<p>这是求f(27)，还可以勉强递归。如果求f(100)呢？简直是天文数字。最终结果就是<strong>递归超时</strong>。</p>
+<p>求总体最值，一定优先考虑<strong>动态规划</strong><br>不要憨憨的去递归。</p>
+<p><strong>第三步，按照实际逻辑设置边界情况和初始条件</strong>。</p>
+<p><strong>【必做】</strong>否则即使转移方程正确也大概率无法跑通代码。</p>
+<p>f[X] = min{f[X-2]+1, f[X-5]+1, f[X-7]+1}的边界情况是[x-2]/[x-5]/[x-7]不能小于0（硬币面值为正），也不能高于27。</p>
+<p><strong>故对边界情况设定如下</strong>：</p>
+<p><strong>如果硬币面值不能组合出Y，就定义f[Y]=正无穷</strong><br>例如f[-1]=f[-2]=…=正无穷；<br>f[1] =min{f[-1]+1, f[-4]+1,f[-6]+1}=正无穷,</p>
+<p><strong>特殊情况</strong>：本题的F[0]对应的情况为F[-2]、F[-5]、F[-7]，按照上文的边界情况设定结果是正无穷。</p>
+<p>但是实际上F[0]的结果是存在的（即使用0个硬币的情况下），F[0]=0。<br>可是按照我们刚刚的设定，F[0]=F[0-2]+1= F[-2]+1=正无穷。</p>
+<p>岂不是矛盾？</p>
+<p>这种用转移方程无法计算，但是又实际存在的情况，就必须通过<strong>手动定义</strong>。</p>
+<p><strong>这里手动强制定义初始条件为：F[0]=0</strong>。</p>
+<p>而从0之后的数值是没矛盾的，比如F[1]= F[1-2]+1= F[-1]+1=正无穷（正无穷加任何数结果还是正无穷）；F[2]= F[2-2]+1= F[0]+1=1……</p>
+<p><strong>第四步，确定计算顺序并计算求解</strong></p>
+<p>那么开始计算时，是从F[1]、F[2]开始呢？还是从F[27]、F[26]开始呢？</p>
+<p><strong>判断计算顺序正确与否的原则是</strong>：<br>当我们要计算F[X]（等式左边，如F[10]）的时候，等式右边（f[X-2], f[X-5], f[X-7]等）都是已经得到结果的状态，这个计算顺序就是OK的。</p>
+<p><strong>实际就是从小到大的计算方式</strong>。</p>
+<p>例如我们算到F[12]的时候，发现F[11]、F[10]、F[9]都已经算过了，这种算法就是对的；<br>而开始算F[27]的时候，发现F[26]还没有算，这样的顺序就是错的。</p>
+<p>很显然这样的情况下写一个FOR循环就够了。</p>
+<p>回到这道题，采用动态规划的算法，每一步只尝试三种硬币，一共进行了27步。算法时间复杂度（即需要进行的步数）为27×3。</p>
+<p><strong>与递归相比，没有任何重复计算</strong>。</p>
+<p><strong>原题练习及实际代码</strong>：<br>这道题是lintcode编号669的Coin Change问题。<br>代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">public int coinChange(int[] A, int M)&#123;</span><br><span class="line">  // A = [2,5,7]</span><br><span class="line">  // M = 27 </span><br><span class="line">  int[] f = new int[M + 1];</span><br><span class="line">  int n = A.length; // 硬币的种类</span><br><span class="line"></span><br><span class="line">  // 初始化, 0个硬币</span><br><span class="line">  f[0] = 0;</span><br><span class="line">  // f[1], f[2], ... , f[27] = Integer.MAX_VALUE</span><br><span class="line">  for (int i = 1; i &lt;= M; i++)&#123;</span><br><span class="line">    f[i] = Integer.MAX_VALUE;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  for (int i = 1; i &lt;= M; i++)&#123;</span><br><span class="line">    // 使用第j个硬币 A[j]</span><br><span class="line">    // f[i] = min&#123;f[i-A[0]]+1, ... , f[i-A[n-1]]+1&#125;</span><br><span class="line">    for (int j = 0; j &lt; n; ++j)&#123;</span><br><span class="line">      // 如果通过放这个硬币能够达到重量i</span><br><span class="line">      if (i &gt;= A[j] &amp;&amp; f[i - A[j]] != Integer.MAX_VALUE) &#123;</span><br><span class="line">        // 获得i的重量的硬币数就可能是获得i-A[j]重量硬币数的方案+1</span><br><span class="line">        // 拿这个方案数量与原本的方案数打擂台，取最小值就行</span><br><span class="line">        f[i] = Math.min(f[i - A[j]] + 1, f[i]);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  if (f[M] == Integer.MAX_VALUE)&#123;</span><br><span class="line">    return -1;</span><br><span class="line">  &#125;</span><br><span class="line">  return f[M];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>最后总结</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">1、这是**求最值问题**，用动态规划方式求解。</span><br><span class="line"></span><br><span class="line">2、进入求解过程，先确定问题状态</span><br><span class="line">     - 提炼最后一步</span><br><span class="line">     （最优策略中使用的最后一枚硬币aK） </span><br><span class="line">     -子问题转化</span><br><span class="line">     （最少的硬币拼出更小的面值27-aK）</span><br><span class="line"></span><br><span class="line">3、构建转移方程</span><br><span class="line">     f[X] = min&#123;f[X-2]+1, f[X-5]+1, f[X-7]+1&#125; </span><br><span class="line">    （求min是因为题目要求求最小）</span><br><span class="line"></span><br><span class="line">4、设置初始条件和边界情况</span><br><span class="line">     f[0] = 0, 如果不能拼出Y，f[Y]=正无穷</span><br><span class="line"></span><br><span class="line">5、确定计算顺序并计算求解</span><br><span class="line">     f[0], f[1], f[2]……</span><br></pre></td></tr></table></figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+
