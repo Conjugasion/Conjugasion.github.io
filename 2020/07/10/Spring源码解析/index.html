@@ -92,7 +92,7 @@
           <!-- Date -->
           <span class="date-time info">On
             <span class="date">2020-07-10</span>
-            <span class="time">15:28:54</span>
+            <span class="time">21:16:52</span>
           </span>
           
           <!--  Categories  -->
@@ -119,6 +119,43 @@
 </div>
 <br />
 
+<h3 id="Spring-Bean的生命周期"><a href="#Spring-Bean的生命周期" class="headerlink" title="Spring Bean的生命周期"></a><strong>Spring Bean的生命周期</strong></h3><div style="text-align:center">
+<img src="/Spring源码解析/image2.jpg">
+</div>
+<br />
+<div style="text-align:center">
+<img src="/Spring源码解析/image3.jpg">
+</div>
+<br />
+-------------------------------------------------------------------------------------------------------------------
+<div style="text-align:center">
+<img src="/Spring源码解析/image4.jpg">
+</div>
+<br />
+
+<p><strong>Bean 的生命周期</strong><br>如上图所示，Bean 的生命周期还是比较复杂的，下面来对上图每一个步骤做文字描述:</p>
+<ol>
+<li><p>Spring启动，查找并加载需要被Spring管理的bean，进行Bean的实例化</p>
+</li>
+<li><p>Bean实例化后对将Bean的引入和值注入到Bean的属性中</p>
+</li>
+<li><p>如果Bean实现了BeanNameAware接口的话，Spring将Bean的Id传递给setBeanName()方法</p>
+</li>
+<li><p>如果Bean实现了BeanFactoryAware接口的话，Spring将调用setBeanFactory()方法，将BeanFactory容器实例传入</p>
+</li>
+<li><p>如果Bean实现了ApplicationContextAware接口的话，Spring将调用Bean的setApplicationContext()方法，将bean所在应用上下文引用传入进来。</p>
+</li>
+<li><p>如果Bean实现了BeanPostProcessor接口，Spring就将调用他们的postProcessBeforeInitialization()方法。</p>
+</li>
+<li><p>如果Bean实现了InitializingBean接口，Spring将调用他们的afterPropertiesSet()方法。类似的，如果bean使用init-method声明了初始化方法，该方法也会被调用</p>
+</li>
+<li><p>如果Bean 实现了BeanPostProcessor接口，Spring就将调用他们的postProcessAfterInitialization()方法。</p>
+</li>
+<li><p>此时，Bean已经准备就绪，可以被应用程序使用了。他们将一直驻留在应用上下文中，直到应用上下文被销毁。</p>
+</li>
+<li><p>如果bean实现了DisposableBean接口，Spring将调用它的destory()接口方法。如果bean使用了destory-method声明销毁方法，该方法也会被调用。</p>
+</li>
+</ol>
 <p><strong>核心代码–入口</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public ClassPathXmlApplicationContext(String[] configLocations, boolean refresh, ApplicationContext parent) throws BeansException &#123;</span><br><span class="line">	super(parent);</span><br><span class="line">	setConfigLocations(configLocations);   # 读取xml形式的bean文件</span><br><span class="line">	if (refresh) &#123;</span><br><span class="line">		refresh();    # 核心函数！</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>核心代码–refresh()方法</strong></p>
